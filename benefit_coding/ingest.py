@@ -1,14 +1,10 @@
-"""Step 1. Ingest a plan document: read its text (OCR when scanned), classify it, split it into sections."""
+"""Step 1. Ingest a plan document: read its text with Azure Document Intelligence, classify it, split it."""
 import json
 import re
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
-import pymupdf
-
 from . import config, ocr
-
-MIN_CHARS_PER_PAGE = 80  # a page with less text than this is treated as a scan
 
 DOCUMENT_TYPES = {
     "sbc": ["summary of benefits and coverage", "important questions", "common medical event"],
@@ -41,7 +37,7 @@ class Document:
     source: str
     doc_type: str
     page_count: int
-    ocr_used: bool
+    reader: str
     pages: list = field(default_factory=list)     # [{"page": n, "text": "..."}]
     sections: list = field(default_factory=list)  # [Section]
 
@@ -52,15 +48,6 @@ class Document:
             if names is None or section["name"] in names:
                 out += [f"[[page {p['page']}]]\n{p['text']}" for p in section["parts"]]
         return "\n\n".join(out)
-
-
-def read_pages(path):
-    """Return ([page text], ocr_used). Falls back to OCR when the PDF has no usable text layer."""
-    with pymupdf.open(path) as pdf:
-        pages = [page.get_text() for page in pdf]
-    if sum(len(p.strip()) for p in pages) >= MIN_CHARS_PER_PAGE * len(pages):
-        return pages, False
-    return ocr.read_pages(path), True
 
 
 def classify(pages):
@@ -106,14 +93,14 @@ def split_sections(pages, doc_type):
 
 def ingest(path, doc_id=None):
     path = Path(path)
-    pages, ocr_used = read_pages(path)
+    pages = ocr.read_pages(path)  # digital and scanned PDFs take the same path
     doc_type = classify(pages)
     return Document(
         doc_id=doc_id or path.stem,
         source=str(path),
         doc_type=doc_type,
         page_count=len(pages),
-        ocr_used=ocr_used,
+        reader=ocr.READER,
         pages=[{"page": i, "text": t} for i, t in enumerate(pages, 1)],
         sections=[asdict(s) for s in split_sections(pages, doc_type)],
     )

@@ -36,11 +36,12 @@ Pipeline steps 1 to 3 (ingest, AI extraction, code mapping) are implemented in `
 | Service | Used for |
 | --- | --- |
 | Azure Blob Storage | Storing the public plan documents and answer key |
-| Azure Document Intelligence | OCR for scanned documents (step 1) |
+| Azure Document Intelligence | Reading every plan document, digital or scanned (step 1) |
 | Azure OpenAI (`gpt-5-mini`) | Benefit extraction (step 2) |
+| Azure Table Storage | Code library and the codes assigned to each plan (step 3) |
 | CMS Exchange Public Use Files and insurer websites | Public source documents and published values |
 
-Step 3 (code mapping) and scoring run locally with no external service. Details are in [Pipeline](docs/pipeline.md#services-used).
+Scoring runs locally with no external service. Details are in [Pipeline](docs/pipeline.md#services-used).
 
 ## Documentation
 

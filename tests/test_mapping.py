@@ -5,7 +5,7 @@ from benefit_coding import mapping
 
 @pytest.fixture(scope="module")
 def library():
-    return mapping.load_library()
+    return mapping.read_seed()  # the seed file, so tests make no network calls
 
 
 def item(field, status="value", **values):

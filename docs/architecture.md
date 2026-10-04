@@ -31,9 +31,9 @@ flowchart TD
 | Stage | Prototype (built or planned) | Status |
 | --- | --- | --- |
 | Document store | Azure Blob Storage (`medbencodingf946de69` / `prototype-docs`); sources are the CMS Exchange Public Use Files and insurer websites | Built |
-| 1. Ingest | PyMuPDF for digital PDFs; Azure Document Intelligence (`prebuilt-read`) for scans; rule-based classification and section splitting | Built |
+| 1. Ingest | Azure Document Intelligence (`prebuilt-read`) reads every document, digital or scanned; rule-based classification and section splitting | Built |
 | 2. Extract | Azure OpenAI (`gpt-5-mini`, deployment `extract` on the `medbencoding-ai` resource) with structured JSON output | Built |
-| 3. Map | Local rules engine and code library lookup table; no external service | Built |
+| 3. Map | Code library and coded plans in Azure Table Storage (`codelibrary` and `codedplans` tables in `medbencodingf946de69`); mapping rules run in the pipeline process | Built |
 | 4. Validate | Local rules-based cost calculator and SBC reconciliation; no external service planned | Not built |
 | 5. Review | Lightweight web review screen, run locally | Not built |
 | 6. Load | Client claims system by API or load file | Production phase |

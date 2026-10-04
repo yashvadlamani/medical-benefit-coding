@@ -3,6 +3,7 @@
     python -m benefit_coding run                 # ingest, extract and map all pinned plans
     python -m benefit_coding run --plan <id>     # one plan
     python -m benefit_coding run --file <pdf>    # any document, for example an unseen SBC
+    python -m benefit_coding seed-codes          # load the code library CSV into Azure Table Storage
     python -m benefit_coding evaluate            # accuracy report against the published values
 """
 import argparse
@@ -40,8 +41,13 @@ def main():
     run.add_argument("--file", help="path to any plan document")
     run.add_argument("--skip-existing", action="store_true", help="reuse saved extractions")
     run.add_argument("--workers", type=int, default=5)
+    commands.add_parser("seed-codes", help="load the code library into Azure Table Storage")
     commands.add_parser("evaluate", help="write the accuracy report")
     args = parser.parse_args()
+
+    if args.command == "seed-codes":
+        print(f"{mapping.seed_library()} codes loaded into the {mapping.LIBRARY_TABLE} table")
+        return
 
     plans = pinned_plans()
     if args.command == "evaluate":

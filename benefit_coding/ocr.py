@@ -1,4 +1,4 @@
-"""OCR for scanned documents, using Azure Document Intelligence (prebuilt read model)."""
+"""Document reading with Azure Document Intelligence (prebuilt read model), for digital and scanned PDFs."""
 import json
 import time
 import urllib.request
@@ -7,10 +7,11 @@ from pathlib import Path
 from . import config
 
 API_VERSION = "2024-11-30"
+READER = "azure-document-intelligence/prebuilt-read"
 
 
 def read_pages(path):
-    """Return the text of each page of a scanned PDF."""
+    """Return the text of each page of a PDF."""
     endpoint = config.setting("AZURE_AI_ENDPOINT").rstrip("/")
     headers = {"Ocp-Apim-Subscription-Key": config.setting("AZURE_AI_KEY")}
     url = f"{endpoint}/documentintelligence/documentModels/prebuilt-read:analyze?api-version={API_VERSION}"
