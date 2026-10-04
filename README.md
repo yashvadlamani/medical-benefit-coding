@@ -33,6 +33,7 @@ Targets for the production release:
 | --- | --- |
 | [Architecture](docs/architecture.md) | The six-stage coding pipeline and learning loop |
 | [Implementation plan](docs/implementation-plan.md) | Business case, delivery plan, prototype and production phases, compliance, testing, success metrics, risks, rollout, approvals, glossary |
+| [Data sources](docs/data-sources.md) | Public documents used by the prototype, where they are stored, and how to re-download them |
 
 ## License
 
