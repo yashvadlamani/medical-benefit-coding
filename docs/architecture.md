@@ -34,8 +34,8 @@ flowchart TD
 | 1. Ingest | Azure Document Intelligence (`prebuilt-read`) reads every document, digital or scanned; rule-based classification and section splitting | Built |
 | 2. Extract | Azure OpenAI (`gpt-5-mini`, deployment `extract` on the `medbencoding-ai` resource) with structured JSON output | Built |
 | 3. Map | Code library and coded plans in Azure Table Storage (`codelibrary` and `codedplans` tables in `medbencodingf946de69`); mapping rules run in the pipeline process | Built |
-| 4. Validate | Local rules-based cost calculator and SBC reconciliation; no external service planned | Not built |
-| 5. Review | Lightweight web review screen, run locally | Not built |
+| 4. Validate | SBC reconciliation, consistency rules and a rules-based test-claim calculator in the pipeline process; LLM judge on Azure OpenAI (`gpt-5-mini`) | Built (rough draft) |
+| 5. Review | Flask review screen on Azure App Service (`medbencoding-review-f946de69`); decisions and audit trail in Azure Table Storage | Built (rough draft), live at <https://medbencoding-review-f946de69.azurewebsites.net> |
 | 6. Load | Client claims system by API or load file | Production phase |
 
 Resource names, API versions and cost notes are in [pipeline.md](pipeline.md#services-used).

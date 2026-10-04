@@ -4,7 +4,7 @@ import re
 
 from openai import AzureOpenAI
 
-from . import config
+from . import config, store
 from .fields import AMOUNT, BY_NAME, COST_SHARE, FIELDS, FLAG
 
 REVIEW_THRESHOLD = 0.8      # fields below this confidence are flagged for the reviewer
@@ -187,7 +187,4 @@ def extract(document):
 
 
 def save(result):
-    out = config.OUTPUT / "extracted" / f"{result['doc_id']}.json"
-    out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(result, indent=1), encoding="utf-8")
-    return out
+    store.write_json(f"extracted/{result['doc_id']}.json", result)
