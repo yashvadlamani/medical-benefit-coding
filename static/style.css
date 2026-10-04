@@ -49,6 +49,8 @@ section { overflow-x: auto; }
 .big { font-size: 1.6rem; font-weight: 600; }
 .big.bad { color: var(--fail); } .big.good { color: var(--pass); }
 .plan-actions { display: flex; gap: 8px; }
+.login { max-width: 360px; margin: 48px auto; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 20px; }
+.login form { display: flex; flex-direction: column; gap: 8px; }
 
 .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start; }
 @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }

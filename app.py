@@ -2,17 +2,29 @@
 
 Reads pipeline outputs from Azure Blob Storage and stores decisions and the audit trail in Azure Table Storage.
 Run locally with `flask run`; on Azure App Service it is served by gunicorn as `app:app`.
+
+The whole site sits behind one shared password. Two settings are required:
+  REVIEW_PASSWORD_HASH   a werkzeug password hash (never the password itself)
+  FLASK_SECRET_KEY       random string that signs the session cookie
 """
+import os
 import re
+from datetime import timedelta
 from functools import lru_cache
 
-from flask import Flask, abort, make_response, redirect, render_template, request, url_for
+from flask import Flask, abort, make_response, redirect, render_template, request, session, url_for
 from markupsafe import Markup, escape
+from werkzeug.security import check_password_hash
 
 from benefit_coding import review, store
 from benefit_coding.fields import FIELDS
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("FLASK_SECRET_KEY") or os.urandom(32)
+app.config.update(SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SAMESITE="Lax",
+                  SESSION_COOKIE_SECURE=bool(os.environ.get("WEBSITE_HOSTNAME")),  # set on App Service, where HTTPS is forced
+                  PERMANENT_SESSION_LIFETIME=timedelta(hours=12))
+OPEN_ENDPOINTS = {"login", "healthz", "static"}
 ok = {"approve", "edit"}  # field decisions that let a plan be approved
 
 
@@ -43,6 +55,34 @@ def highlight(text, quote):
             position = hi
     out.append(escape(text[position:]))
     return Markup("").join(out)
+
+
+@app.before_request
+def require_login():
+    if request.endpoint not in OPEN_ENDPOINTS and not session.get("signed_in"):
+        return redirect(url_for("login", next=request.full_path.rstrip("?")))
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    password_hash = os.environ.get("REVIEW_PASSWORD_HASH", "")
+    error = None if password_hash else "No password is configured for this site, so nobody can sign in."
+    if request.method == "POST" and password_hash:
+        if check_password_hash(password_hash, request.form.get("password", "")):
+            session.clear()
+            session["signed_in"] = True
+            session.permanent = True
+            target = request.form.get("next", "")
+            # only follow a path on this site, never a full URL
+            return redirect(target if target.startswith("/") and not target.startswith("//") else url_for("index"))
+        error = "That password is not correct."
+    return render_template("login.html", error=error, next=request.values.get("next", "")), 401 if error else 200
+
+
+@app.post("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("login"))
 
 
 def reviewer():

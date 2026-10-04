@@ -66,7 +66,7 @@ Notes:
 
 - **Authentication:** the pipeline uses the AI resource's key and the storage account's connection string from the git-ignored `.env` file. Blob uploads use the logged-in Azure CLI account.
 - **What leaves the machine:** step 1 sends each PDF to Document Intelligence; steps 2 and 4 send the text of the SBC sections to Azure OpenAI; outputs, codes and decisions are stored in the storage account. All of it is public plan data.
-- **Access to the review app:** the site has no sign-in. Anyone with the address can open it and record decisions; the reviewer name is whatever the visitor types.
+- **Access to the review app:** the whole site is behind one shared password. Only a hash of it is stored, in the web app setting `REVIEW_PASSWORD_HASH`; it is not in this repository. The reviewer name is whatever the signed-in visitor types.
 - **Cost:** the App Service plan (B1) is the only resource with a fixed monthly charge; it can be scaled down or stopped between demos. Storage and both AI services are pay-per-use with no idle charge. A full 25-plan run reads about 200 pages through Document Intelligence (billed per page), uses about 100k input and 160k output tokens, and makes a few hundred table operations.
 - **Separate from HCM-Agent:** none of these resources are shared with the `clara-rg` resource group.
 
@@ -152,7 +152,7 @@ git archive --format=zip -o review-app.zip HEAD app.py requirements.txt benefit_
 az webapp deploy -n medbencoding-review-f946de69 -g medical-benefit-coding-rg --src-path review-app.zip --type zip
 ```
 
-The web app needs one setting, `AZURE_STORAGE_CONNECTION_STRING`, and `SCM_DO_BUILD_DURING_DEPLOYMENT=true` so dependencies install on deploy.
+The web app needs these settings: `AZURE_STORAGE_CONNECTION_STRING`; `REVIEW_PASSWORD_HASH` (a werkzeug hash of the shared password; without it nobody can sign in); `FLASK_SECRET_KEY` (a random string that signs the session cookie); and `SCM_DO_BUILD_DURING_DEPLOYMENT=true` so dependencies install on deploy.
 
 ## Results
 
@@ -183,6 +183,6 @@ How to read these numbers:
 
 - Only SBCs are extracted. Brochures are classified but not used.
 - Scanned documents were checked on one image-only copy of an SBC through ingest only; extraction accuracy on scans is not measured. The script that made that copy has been removed.
-- The review app has no sign-in, no work queue and no roles, and edits are free text: a corrected value is recorded in the audit trail but does not re-run mapping or validation.
+- The review app has a single shared password rather than individual accounts, no limit on sign-in attempts, no work queue and no roles, and edits are free text: a corrected value is recorded in the audit trail but does not re-run mapping or validation.
 - Review time and coder verdict are not measured; no benefit coder has used the screen.
 - Parity and state-mandate checks, and the claims-system load (step 6), are production-phase work.
