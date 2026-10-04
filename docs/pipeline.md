@@ -51,7 +51,6 @@ Supporting tools:
 | `curl` | Downloading the public documents |
 | GitHub | Source repository; documents and outputs are not stored there |
 | `pytest` | Unit tests; they make no network calls (mapping tests read the seed CSV) |
-| PyMuPDF | Only for `ingest/make_scanned_copy.py`, which makes scan-like test documents; not used by the pipeline |
 
 Notes:
 
@@ -108,7 +107,7 @@ Latest run (one end-to-end run on the 25 pinned plans, with step 1 on Azure Docu
 
 How to read these numbers:
 
-- **Accuracy is lower than with the local PDF reader.** The previous run, which read digital PDFs locally with PyMuPDF, scored 99.2% (99.7% simple, 98.5% moderate). All 13 misses in this run are drug-tier fields in multi-column tables (Mountain Health and Anthem). Document Intelligence returns table text in a different order, and the extraction rules were tuned on the earlier text; they have not been re-tuned, because this configuration was run once.
+- **Accuracy is lower than with the local PDF reader.** The previous run, which read digital PDFs with a local text reader that has since been removed, scored 99.2% (99.7% simple, 98.5% moderate). All 13 misses in this run are drug-tier fields in multi-column tables (Mountain Health and Anthem). Document Intelligence returns table text in a different order, and the extraction rules were tuned on the earlier text; they have not been re-tuned, because this configuration was run once.
 - **The extraction rules were tuned on these same 25 plans** using the local reader. The first untuned run scored 96.2%.
 - **Unseen plans** were only measured with the local reader: ten other small-group plans scored 99.5% (199 of 200). They come from the same four insurers and were not re-run in this configuration.
 - **Results vary slightly between runs.** The model is not deterministic; with the local reader, runs ranged from 99.2% to 100%.
@@ -118,6 +117,6 @@ How to read these numbers:
 ## Not covered yet
 
 - Only SBCs are extracted. Brochures are classified but not used.
-- Scanned documents were checked on one scan-like copy of an SBC through ingest only; extraction accuracy on scans is not measured.
+- Scanned documents were checked on one image-only copy of an SBC through ingest only; extraction accuracy on scans is not measured. The script that made that copy has been removed.
 - Ingested text and extraction records stay in `./output`; only the coded results are stored in Azure.
 - No SBC reconciliation, test claims, review screen or audit trail (steps 4 and 5).
