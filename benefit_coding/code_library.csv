@@ -1,0 +1,717 @@
+field,type,value,system_code,description
+deductible_individual_in,amount,*,ACC-DED-IND-INN,"Overall in-network deductible, individual; dollar amount carried as a parameter"
+deductible_individual_in,not_applicable,,ACC-DED-IND-INN-NA,"Overall in-network deductible, individual; does not apply"
+deductible_family_in,amount,*,ACC-DED-FAM-INN,"Overall in-network deductible, family; dollar amount carried as a parameter"
+deductible_family_in,not_applicable,,ACC-DED-FAM-INN-NA,"Overall in-network deductible, family; does not apply"
+deductible_individual_oon,amount,*,ACC-DED-IND-OON,"Overall out-of-network deductible, individual; dollar amount carried as a parameter"
+deductible_individual_oon,not_applicable,,ACC-DED-IND-OON-NA,"Overall out-of-network deductible, individual; does not apply"
+deductible_family_oon,amount,*,ACC-DED-FAM-OON,"Overall out-of-network deductible, family; dollar amount carried as a parameter"
+deductible_family_oon,not_applicable,,ACC-DED-FAM-OON-NA,"Overall out-of-network deductible, family; does not apply"
+oop_max_individual_in,amount,*,ACC-OOP-IND-INN,"In-network out-of-pocket limit, individual; dollar amount carried as a parameter"
+oop_max_individual_in,not_applicable,,ACC-OOP-IND-INN-NA,"In-network out-of-pocket limit, individual; does not apply"
+oop_max_family_in,amount,*,ACC-OOP-FAM-INN,"In-network out-of-pocket limit, family; dollar amount carried as a parameter"
+oop_max_family_in,not_applicable,,ACC-OOP-FAM-INN-NA,"In-network out-of-pocket limit, family; does not apply"
+oop_max_individual_oon,amount,*,ACC-OOP-IND-OON,"Out-of-network out-of-pocket limit, individual; dollar amount carried as a parameter"
+oop_max_individual_oon,not_applicable,,ACC-OOP-IND-OON-NA,"Out-of-network out-of-pocket limit, individual; does not apply"
+oop_max_family_oon,amount,*,ACC-OOP-FAM-OON,"Out-of-network out-of-pocket limit, family; dollar amount carried as a parameter"
+oop_max_family_oon,not_applicable,,ACC-OOP-FAM-OON-NA,"Out-of-network out-of-pocket limit, family; does not apply"
+pcp_visit,no_charge,,PCP-NC,Primary care visit to treat an injury or illness; no charge
+pcp_visit,not_covered,,PCP-NCOV,Primary care visit to treat an injury or illness; not covered
+pcp_visit,copay,5,PCP-CP0005,Primary care visit to treat an injury or illness; $5 copay
+pcp_visit,copay,10,PCP-CP0010,Primary care visit to treat an injury or illness; $10 copay
+pcp_visit,copay,15,PCP-CP0015,Primary care visit to treat an injury or illness; $15 copay
+pcp_visit,copay,20,PCP-CP0020,Primary care visit to treat an injury or illness; $20 copay
+pcp_visit,copay,25,PCP-CP0025,Primary care visit to treat an injury or illness; $25 copay
+pcp_visit,copay,30,PCP-CP0030,Primary care visit to treat an injury or illness; $30 copay
+pcp_visit,copay,35,PCP-CP0035,Primary care visit to treat an injury or illness; $35 copay
+pcp_visit,copay,40,PCP-CP0040,Primary care visit to treat an injury or illness; $40 copay
+pcp_visit,copay,45,PCP-CP0045,Primary care visit to treat an injury or illness; $45 copay
+pcp_visit,copay,50,PCP-CP0050,Primary care visit to treat an injury or illness; $50 copay
+pcp_visit,copay,55,PCP-CP0055,Primary care visit to treat an injury or illness; $55 copay
+pcp_visit,copay,60,PCP-CP0060,Primary care visit to treat an injury or illness; $60 copay
+pcp_visit,copay,65,PCP-CP0065,Primary care visit to treat an injury or illness; $65 copay
+pcp_visit,copay,70,PCP-CP0070,Primary care visit to treat an injury or illness; $70 copay
+pcp_visit,copay,75,PCP-CP0075,Primary care visit to treat an injury or illness; $75 copay
+pcp_visit,copay,80,PCP-CP0080,Primary care visit to treat an injury or illness; $80 copay
+pcp_visit,copay,85,PCP-CP0085,Primary care visit to treat an injury or illness; $85 copay
+pcp_visit,copay,90,PCP-CP0090,Primary care visit to treat an injury or illness; $90 copay
+pcp_visit,copay,95,PCP-CP0095,Primary care visit to treat an injury or illness; $95 copay
+pcp_visit,copay,100,PCP-CP0100,Primary care visit to treat an injury or illness; $100 copay
+pcp_visit,copay,125,PCP-CP0125,Primary care visit to treat an injury or illness; $125 copay
+pcp_visit,copay,150,PCP-CP0150,Primary care visit to treat an injury or illness; $150 copay
+pcp_visit,copay,175,PCP-CP0175,Primary care visit to treat an injury or illness; $175 copay
+pcp_visit,copay,200,PCP-CP0200,Primary care visit to treat an injury or illness; $200 copay
+pcp_visit,copay,225,PCP-CP0225,Primary care visit to treat an injury or illness; $225 copay
+pcp_visit,copay,250,PCP-CP0250,Primary care visit to treat an injury or illness; $250 copay
+pcp_visit,copay,275,PCP-CP0275,Primary care visit to treat an injury or illness; $275 copay
+pcp_visit,copay,300,PCP-CP0300,Primary care visit to treat an injury or illness; $300 copay
+pcp_visit,copay,325,PCP-CP0325,Primary care visit to treat an injury or illness; $325 copay
+pcp_visit,copay,350,PCP-CP0350,Primary care visit to treat an injury or illness; $350 copay
+pcp_visit,copay,375,PCP-CP0375,Primary care visit to treat an injury or illness; $375 copay
+pcp_visit,copay,400,PCP-CP0400,Primary care visit to treat an injury or illness; $400 copay
+pcp_visit,copay,425,PCP-CP0425,Primary care visit to treat an injury or illness; $425 copay
+pcp_visit,copay,450,PCP-CP0450,Primary care visit to treat an injury or illness; $450 copay
+pcp_visit,copay,475,PCP-CP0475,Primary care visit to treat an injury or illness; $475 copay
+pcp_visit,copay,500,PCP-CP0500,Primary care visit to treat an injury or illness; $500 copay
+pcp_visit,copay,600,PCP-CP0600,Primary care visit to treat an injury or illness; $600 copay
+pcp_visit,copay,700,PCP-CP0700,Primary care visit to treat an injury or illness; $700 copay
+pcp_visit,copay,800,PCP-CP0800,Primary care visit to treat an injury or illness; $800 copay
+pcp_visit,copay,900,PCP-CP0900,Primary care visit to treat an injury or illness; $900 copay
+pcp_visit,copay,1000,PCP-CP1000,Primary care visit to treat an injury or illness; $1000 copay
+pcp_visit,copay,1100,PCP-CP1100,Primary care visit to treat an injury or illness; $1100 copay
+pcp_visit,copay,1200,PCP-CP1200,Primary care visit to treat an injury or illness; $1200 copay
+pcp_visit,copay,1300,PCP-CP1300,Primary care visit to treat an injury or illness; $1300 copay
+pcp_visit,copay,1400,PCP-CP1400,Primary care visit to treat an injury or illness; $1400 copay
+pcp_visit,copay,1500,PCP-CP1500,Primary care visit to treat an injury or illness; $1500 copay
+pcp_visit,coinsurance,5,PCP-CI005,Primary care visit to treat an injury or illness; 5% coinsurance
+pcp_visit,coinsurance,10,PCP-CI010,Primary care visit to treat an injury or illness; 10% coinsurance
+pcp_visit,coinsurance,15,PCP-CI015,Primary care visit to treat an injury or illness; 15% coinsurance
+pcp_visit,coinsurance,20,PCP-CI020,Primary care visit to treat an injury or illness; 20% coinsurance
+pcp_visit,coinsurance,25,PCP-CI025,Primary care visit to treat an injury or illness; 25% coinsurance
+pcp_visit,coinsurance,30,PCP-CI030,Primary care visit to treat an injury or illness; 30% coinsurance
+pcp_visit,coinsurance,35,PCP-CI035,Primary care visit to treat an injury or illness; 35% coinsurance
+pcp_visit,coinsurance,40,PCP-CI040,Primary care visit to treat an injury or illness; 40% coinsurance
+pcp_visit,coinsurance,45,PCP-CI045,Primary care visit to treat an injury or illness; 45% coinsurance
+pcp_visit,coinsurance,50,PCP-CI050,Primary care visit to treat an injury or illness; 50% coinsurance
+specialist_visit,no_charge,,SPC-NC,Specialist visit; no charge
+specialist_visit,not_covered,,SPC-NCOV,Specialist visit; not covered
+specialist_visit,copay,5,SPC-CP0005,Specialist visit; $5 copay
+specialist_visit,copay,10,SPC-CP0010,Specialist visit; $10 copay
+specialist_visit,copay,15,SPC-CP0015,Specialist visit; $15 copay
+specialist_visit,copay,20,SPC-CP0020,Specialist visit; $20 copay
+specialist_visit,copay,25,SPC-CP0025,Specialist visit; $25 copay
+specialist_visit,copay,30,SPC-CP0030,Specialist visit; $30 copay
+specialist_visit,copay,35,SPC-CP0035,Specialist visit; $35 copay
+specialist_visit,copay,40,SPC-CP0040,Specialist visit; $40 copay
+specialist_visit,copay,45,SPC-CP0045,Specialist visit; $45 copay
+specialist_visit,copay,50,SPC-CP0050,Specialist visit; $50 copay
+specialist_visit,copay,55,SPC-CP0055,Specialist visit; $55 copay
+specialist_visit,copay,60,SPC-CP0060,Specialist visit; $60 copay
+specialist_visit,copay,65,SPC-CP0065,Specialist visit; $65 copay
+specialist_visit,copay,70,SPC-CP0070,Specialist visit; $70 copay
+specialist_visit,copay,75,SPC-CP0075,Specialist visit; $75 copay
+specialist_visit,copay,80,SPC-CP0080,Specialist visit; $80 copay
+specialist_visit,copay,85,SPC-CP0085,Specialist visit; $85 copay
+specialist_visit,copay,90,SPC-CP0090,Specialist visit; $90 copay
+specialist_visit,copay,95,SPC-CP0095,Specialist visit; $95 copay
+specialist_visit,copay,100,SPC-CP0100,Specialist visit; $100 copay
+specialist_visit,copay,125,SPC-CP0125,Specialist visit; $125 copay
+specialist_visit,copay,150,SPC-CP0150,Specialist visit; $150 copay
+specialist_visit,copay,175,SPC-CP0175,Specialist visit; $175 copay
+specialist_visit,copay,200,SPC-CP0200,Specialist visit; $200 copay
+specialist_visit,copay,225,SPC-CP0225,Specialist visit; $225 copay
+specialist_visit,copay,250,SPC-CP0250,Specialist visit; $250 copay
+specialist_visit,copay,275,SPC-CP0275,Specialist visit; $275 copay
+specialist_visit,copay,300,SPC-CP0300,Specialist visit; $300 copay
+specialist_visit,copay,325,SPC-CP0325,Specialist visit; $325 copay
+specialist_visit,copay,350,SPC-CP0350,Specialist visit; $350 copay
+specialist_visit,copay,375,SPC-CP0375,Specialist visit; $375 copay
+specialist_visit,copay,400,SPC-CP0400,Specialist visit; $400 copay
+specialist_visit,copay,425,SPC-CP0425,Specialist visit; $425 copay
+specialist_visit,copay,450,SPC-CP0450,Specialist visit; $450 copay
+specialist_visit,copay,475,SPC-CP0475,Specialist visit; $475 copay
+specialist_visit,copay,500,SPC-CP0500,Specialist visit; $500 copay
+specialist_visit,copay,600,SPC-CP0600,Specialist visit; $600 copay
+specialist_visit,copay,700,SPC-CP0700,Specialist visit; $700 copay
+specialist_visit,copay,800,SPC-CP0800,Specialist visit; $800 copay
+specialist_visit,copay,900,SPC-CP0900,Specialist visit; $900 copay
+specialist_visit,copay,1000,SPC-CP1000,Specialist visit; $1000 copay
+specialist_visit,copay,1100,SPC-CP1100,Specialist visit; $1100 copay
+specialist_visit,copay,1200,SPC-CP1200,Specialist visit; $1200 copay
+specialist_visit,copay,1300,SPC-CP1300,Specialist visit; $1300 copay
+specialist_visit,copay,1400,SPC-CP1400,Specialist visit; $1400 copay
+specialist_visit,copay,1500,SPC-CP1500,Specialist visit; $1500 copay
+specialist_visit,coinsurance,5,SPC-CI005,Specialist visit; 5% coinsurance
+specialist_visit,coinsurance,10,SPC-CI010,Specialist visit; 10% coinsurance
+specialist_visit,coinsurance,15,SPC-CI015,Specialist visit; 15% coinsurance
+specialist_visit,coinsurance,20,SPC-CI020,Specialist visit; 20% coinsurance
+specialist_visit,coinsurance,25,SPC-CI025,Specialist visit; 25% coinsurance
+specialist_visit,coinsurance,30,SPC-CI030,Specialist visit; 30% coinsurance
+specialist_visit,coinsurance,35,SPC-CI035,Specialist visit; 35% coinsurance
+specialist_visit,coinsurance,40,SPC-CI040,Specialist visit; 40% coinsurance
+specialist_visit,coinsurance,45,SPC-CI045,Specialist visit; 45% coinsurance
+specialist_visit,coinsurance,50,SPC-CI050,Specialist visit; 50% coinsurance
+preventive_care,no_charge,,PRV-NC,"Preventive care, screening, immunization; no charge"
+preventive_care,not_covered,,PRV-NCOV,"Preventive care, screening, immunization; not covered"
+preventive_care,copay,5,PRV-CP0005,"Preventive care, screening, immunization; $5 copay"
+preventive_care,copay,10,PRV-CP0010,"Preventive care, screening, immunization; $10 copay"
+preventive_care,copay,15,PRV-CP0015,"Preventive care, screening, immunization; $15 copay"
+preventive_care,copay,20,PRV-CP0020,"Preventive care, screening, immunization; $20 copay"
+preventive_care,copay,25,PRV-CP0025,"Preventive care, screening, immunization; $25 copay"
+preventive_care,copay,30,PRV-CP0030,"Preventive care, screening, immunization; $30 copay"
+preventive_care,copay,35,PRV-CP0035,"Preventive care, screening, immunization; $35 copay"
+preventive_care,copay,40,PRV-CP0040,"Preventive care, screening, immunization; $40 copay"
+preventive_care,copay,45,PRV-CP0045,"Preventive care, screening, immunization; $45 copay"
+preventive_care,copay,50,PRV-CP0050,"Preventive care, screening, immunization; $50 copay"
+preventive_care,copay,55,PRV-CP0055,"Preventive care, screening, immunization; $55 copay"
+preventive_care,copay,60,PRV-CP0060,"Preventive care, screening, immunization; $60 copay"
+preventive_care,copay,65,PRV-CP0065,"Preventive care, screening, immunization; $65 copay"
+preventive_care,copay,70,PRV-CP0070,"Preventive care, screening, immunization; $70 copay"
+preventive_care,copay,75,PRV-CP0075,"Preventive care, screening, immunization; $75 copay"
+preventive_care,copay,80,PRV-CP0080,"Preventive care, screening, immunization; $80 copay"
+preventive_care,copay,85,PRV-CP0085,"Preventive care, screening, immunization; $85 copay"
+preventive_care,copay,90,PRV-CP0090,"Preventive care, screening, immunization; $90 copay"
+preventive_care,copay,95,PRV-CP0095,"Preventive care, screening, immunization; $95 copay"
+preventive_care,copay,100,PRV-CP0100,"Preventive care, screening, immunization; $100 copay"
+preventive_care,copay,125,PRV-CP0125,"Preventive care, screening, immunization; $125 copay"
+preventive_care,copay,150,PRV-CP0150,"Preventive care, screening, immunization; $150 copay"
+preventive_care,copay,175,PRV-CP0175,"Preventive care, screening, immunization; $175 copay"
+preventive_care,copay,200,PRV-CP0200,"Preventive care, screening, immunization; $200 copay"
+preventive_care,copay,225,PRV-CP0225,"Preventive care, screening, immunization; $225 copay"
+preventive_care,copay,250,PRV-CP0250,"Preventive care, screening, immunization; $250 copay"
+preventive_care,copay,275,PRV-CP0275,"Preventive care, screening, immunization; $275 copay"
+preventive_care,copay,300,PRV-CP0300,"Preventive care, screening, immunization; $300 copay"
+preventive_care,copay,325,PRV-CP0325,"Preventive care, screening, immunization; $325 copay"
+preventive_care,copay,350,PRV-CP0350,"Preventive care, screening, immunization; $350 copay"
+preventive_care,copay,375,PRV-CP0375,"Preventive care, screening, immunization; $375 copay"
+preventive_care,copay,400,PRV-CP0400,"Preventive care, screening, immunization; $400 copay"
+preventive_care,copay,425,PRV-CP0425,"Preventive care, screening, immunization; $425 copay"
+preventive_care,copay,450,PRV-CP0450,"Preventive care, screening, immunization; $450 copay"
+preventive_care,copay,475,PRV-CP0475,"Preventive care, screening, immunization; $475 copay"
+preventive_care,copay,500,PRV-CP0500,"Preventive care, screening, immunization; $500 copay"
+preventive_care,copay,600,PRV-CP0600,"Preventive care, screening, immunization; $600 copay"
+preventive_care,copay,700,PRV-CP0700,"Preventive care, screening, immunization; $700 copay"
+preventive_care,copay,800,PRV-CP0800,"Preventive care, screening, immunization; $800 copay"
+preventive_care,copay,900,PRV-CP0900,"Preventive care, screening, immunization; $900 copay"
+preventive_care,copay,1000,PRV-CP1000,"Preventive care, screening, immunization; $1000 copay"
+preventive_care,copay,1100,PRV-CP1100,"Preventive care, screening, immunization; $1100 copay"
+preventive_care,copay,1200,PRV-CP1200,"Preventive care, screening, immunization; $1200 copay"
+preventive_care,copay,1300,PRV-CP1300,"Preventive care, screening, immunization; $1300 copay"
+preventive_care,copay,1400,PRV-CP1400,"Preventive care, screening, immunization; $1400 copay"
+preventive_care,copay,1500,PRV-CP1500,"Preventive care, screening, immunization; $1500 copay"
+preventive_care,coinsurance,5,PRV-CI005,"Preventive care, screening, immunization; 5% coinsurance"
+preventive_care,coinsurance,10,PRV-CI010,"Preventive care, screening, immunization; 10% coinsurance"
+preventive_care,coinsurance,15,PRV-CI015,"Preventive care, screening, immunization; 15% coinsurance"
+preventive_care,coinsurance,20,PRV-CI020,"Preventive care, screening, immunization; 20% coinsurance"
+preventive_care,coinsurance,25,PRV-CI025,"Preventive care, screening, immunization; 25% coinsurance"
+preventive_care,coinsurance,30,PRV-CI030,"Preventive care, screening, immunization; 30% coinsurance"
+preventive_care,coinsurance,35,PRV-CI035,"Preventive care, screening, immunization; 35% coinsurance"
+preventive_care,coinsurance,40,PRV-CI040,"Preventive care, screening, immunization; 40% coinsurance"
+preventive_care,coinsurance,45,PRV-CI045,"Preventive care, screening, immunization; 45% coinsurance"
+preventive_care,coinsurance,50,PRV-CI050,"Preventive care, screening, immunization; 50% coinsurance"
+emergency_room,no_charge,,ER-NC,Emergency room care; no charge
+emergency_room,not_covered,,ER-NCOV,Emergency room care; not covered
+emergency_room,copay,5,ER-CP0005,Emergency room care; $5 copay
+emergency_room,copay,10,ER-CP0010,Emergency room care; $10 copay
+emergency_room,copay,15,ER-CP0015,Emergency room care; $15 copay
+emergency_room,copay,20,ER-CP0020,Emergency room care; $20 copay
+emergency_room,copay,25,ER-CP0025,Emergency room care; $25 copay
+emergency_room,copay,30,ER-CP0030,Emergency room care; $30 copay
+emergency_room,copay,35,ER-CP0035,Emergency room care; $35 copay
+emergency_room,copay,40,ER-CP0040,Emergency room care; $40 copay
+emergency_room,copay,45,ER-CP0045,Emergency room care; $45 copay
+emergency_room,copay,50,ER-CP0050,Emergency room care; $50 copay
+emergency_room,copay,55,ER-CP0055,Emergency room care; $55 copay
+emergency_room,copay,60,ER-CP0060,Emergency room care; $60 copay
+emergency_room,copay,65,ER-CP0065,Emergency room care; $65 copay
+emergency_room,copay,70,ER-CP0070,Emergency room care; $70 copay
+emergency_room,copay,75,ER-CP0075,Emergency room care; $75 copay
+emergency_room,copay,80,ER-CP0080,Emergency room care; $80 copay
+emergency_room,copay,85,ER-CP0085,Emergency room care; $85 copay
+emergency_room,copay,90,ER-CP0090,Emergency room care; $90 copay
+emergency_room,copay,95,ER-CP0095,Emergency room care; $95 copay
+emergency_room,copay,100,ER-CP0100,Emergency room care; $100 copay
+emergency_room,copay,125,ER-CP0125,Emergency room care; $125 copay
+emergency_room,copay,150,ER-CP0150,Emergency room care; $150 copay
+emergency_room,copay,175,ER-CP0175,Emergency room care; $175 copay
+emergency_room,copay,200,ER-CP0200,Emergency room care; $200 copay
+emergency_room,copay,225,ER-CP0225,Emergency room care; $225 copay
+emergency_room,copay,250,ER-CP0250,Emergency room care; $250 copay
+emergency_room,copay,275,ER-CP0275,Emergency room care; $275 copay
+emergency_room,copay,300,ER-CP0300,Emergency room care; $300 copay
+emergency_room,copay,325,ER-CP0325,Emergency room care; $325 copay
+emergency_room,copay,350,ER-CP0350,Emergency room care; $350 copay
+emergency_room,copay,375,ER-CP0375,Emergency room care; $375 copay
+emergency_room,copay,400,ER-CP0400,Emergency room care; $400 copay
+emergency_room,copay,425,ER-CP0425,Emergency room care; $425 copay
+emergency_room,copay,450,ER-CP0450,Emergency room care; $450 copay
+emergency_room,copay,475,ER-CP0475,Emergency room care; $475 copay
+emergency_room,copay,500,ER-CP0500,Emergency room care; $500 copay
+emergency_room,copay,600,ER-CP0600,Emergency room care; $600 copay
+emergency_room,copay,700,ER-CP0700,Emergency room care; $700 copay
+emergency_room,copay,800,ER-CP0800,Emergency room care; $800 copay
+emergency_room,copay,900,ER-CP0900,Emergency room care; $900 copay
+emergency_room,copay,1000,ER-CP1000,Emergency room care; $1000 copay
+emergency_room,copay,1100,ER-CP1100,Emergency room care; $1100 copay
+emergency_room,copay,1200,ER-CP1200,Emergency room care; $1200 copay
+emergency_room,copay,1300,ER-CP1300,Emergency room care; $1300 copay
+emergency_room,copay,1400,ER-CP1400,Emergency room care; $1400 copay
+emergency_room,copay,1500,ER-CP1500,Emergency room care; $1500 copay
+emergency_room,coinsurance,5,ER-CI005,Emergency room care; 5% coinsurance
+emergency_room,coinsurance,10,ER-CI010,Emergency room care; 10% coinsurance
+emergency_room,coinsurance,15,ER-CI015,Emergency room care; 15% coinsurance
+emergency_room,coinsurance,20,ER-CI020,Emergency room care; 20% coinsurance
+emergency_room,coinsurance,25,ER-CI025,Emergency room care; 25% coinsurance
+emergency_room,coinsurance,30,ER-CI030,Emergency room care; 30% coinsurance
+emergency_room,coinsurance,35,ER-CI035,Emergency room care; 35% coinsurance
+emergency_room,coinsurance,40,ER-CI040,Emergency room care; 40% coinsurance
+emergency_room,coinsurance,45,ER-CI045,Emergency room care; 45% coinsurance
+emergency_room,coinsurance,50,ER-CI050,Emergency room care; 50% coinsurance
+urgent_care,no_charge,,UC-NC,Urgent care; no charge
+urgent_care,not_covered,,UC-NCOV,Urgent care; not covered
+urgent_care,copay,5,UC-CP0005,Urgent care; $5 copay
+urgent_care,copay,10,UC-CP0010,Urgent care; $10 copay
+urgent_care,copay,15,UC-CP0015,Urgent care; $15 copay
+urgent_care,copay,20,UC-CP0020,Urgent care; $20 copay
+urgent_care,copay,25,UC-CP0025,Urgent care; $25 copay
+urgent_care,copay,30,UC-CP0030,Urgent care; $30 copay
+urgent_care,copay,35,UC-CP0035,Urgent care; $35 copay
+urgent_care,copay,40,UC-CP0040,Urgent care; $40 copay
+urgent_care,copay,45,UC-CP0045,Urgent care; $45 copay
+urgent_care,copay,50,UC-CP0050,Urgent care; $50 copay
+urgent_care,copay,55,UC-CP0055,Urgent care; $55 copay
+urgent_care,copay,60,UC-CP0060,Urgent care; $60 copay
+urgent_care,copay,65,UC-CP0065,Urgent care; $65 copay
+urgent_care,copay,70,UC-CP0070,Urgent care; $70 copay
+urgent_care,copay,75,UC-CP0075,Urgent care; $75 copay
+urgent_care,copay,80,UC-CP0080,Urgent care; $80 copay
+urgent_care,copay,85,UC-CP0085,Urgent care; $85 copay
+urgent_care,copay,90,UC-CP0090,Urgent care; $90 copay
+urgent_care,copay,95,UC-CP0095,Urgent care; $95 copay
+urgent_care,copay,100,UC-CP0100,Urgent care; $100 copay
+urgent_care,copay,125,UC-CP0125,Urgent care; $125 copay
+urgent_care,copay,150,UC-CP0150,Urgent care; $150 copay
+urgent_care,copay,175,UC-CP0175,Urgent care; $175 copay
+urgent_care,copay,200,UC-CP0200,Urgent care; $200 copay
+urgent_care,copay,225,UC-CP0225,Urgent care; $225 copay
+urgent_care,copay,250,UC-CP0250,Urgent care; $250 copay
+urgent_care,copay,275,UC-CP0275,Urgent care; $275 copay
+urgent_care,copay,300,UC-CP0300,Urgent care; $300 copay
+urgent_care,copay,325,UC-CP0325,Urgent care; $325 copay
+urgent_care,copay,350,UC-CP0350,Urgent care; $350 copay
+urgent_care,copay,375,UC-CP0375,Urgent care; $375 copay
+urgent_care,copay,400,UC-CP0400,Urgent care; $400 copay
+urgent_care,copay,425,UC-CP0425,Urgent care; $425 copay
+urgent_care,copay,450,UC-CP0450,Urgent care; $450 copay
+urgent_care,copay,475,UC-CP0475,Urgent care; $475 copay
+urgent_care,copay,500,UC-CP0500,Urgent care; $500 copay
+urgent_care,copay,600,UC-CP0600,Urgent care; $600 copay
+urgent_care,copay,700,UC-CP0700,Urgent care; $700 copay
+urgent_care,copay,800,UC-CP0800,Urgent care; $800 copay
+urgent_care,copay,900,UC-CP0900,Urgent care; $900 copay
+urgent_care,copay,1000,UC-CP1000,Urgent care; $1000 copay
+urgent_care,copay,1100,UC-CP1100,Urgent care; $1100 copay
+urgent_care,copay,1200,UC-CP1200,Urgent care; $1200 copay
+urgent_care,copay,1300,UC-CP1300,Urgent care; $1300 copay
+urgent_care,copay,1400,UC-CP1400,Urgent care; $1400 copay
+urgent_care,copay,1500,UC-CP1500,Urgent care; $1500 copay
+urgent_care,coinsurance,5,UC-CI005,Urgent care; 5% coinsurance
+urgent_care,coinsurance,10,UC-CI010,Urgent care; 10% coinsurance
+urgent_care,coinsurance,15,UC-CI015,Urgent care; 15% coinsurance
+urgent_care,coinsurance,20,UC-CI020,Urgent care; 20% coinsurance
+urgent_care,coinsurance,25,UC-CI025,Urgent care; 25% coinsurance
+urgent_care,coinsurance,30,UC-CI030,Urgent care; 30% coinsurance
+urgent_care,coinsurance,35,UC-CI035,Urgent care; 35% coinsurance
+urgent_care,coinsurance,40,UC-CI040,Urgent care; 40% coinsurance
+urgent_care,coinsurance,45,UC-CI045,Urgent care; 45% coinsurance
+urgent_care,coinsurance,50,UC-CI050,Urgent care; 50% coinsurance
+inpatient_facility,no_charge,,IP-NC,"Hospital stay, facility fee; no charge"
+inpatient_facility,not_covered,,IP-NCOV,"Hospital stay, facility fee; not covered"
+inpatient_facility,copay,5,IP-CP0005,"Hospital stay, facility fee; $5 copay"
+inpatient_facility,copay,10,IP-CP0010,"Hospital stay, facility fee; $10 copay"
+inpatient_facility,copay,15,IP-CP0015,"Hospital stay, facility fee; $15 copay"
+inpatient_facility,copay,20,IP-CP0020,"Hospital stay, facility fee; $20 copay"
+inpatient_facility,copay,25,IP-CP0025,"Hospital stay, facility fee; $25 copay"
+inpatient_facility,copay,30,IP-CP0030,"Hospital stay, facility fee; $30 copay"
+inpatient_facility,copay,35,IP-CP0035,"Hospital stay, facility fee; $35 copay"
+inpatient_facility,copay,40,IP-CP0040,"Hospital stay, facility fee; $40 copay"
+inpatient_facility,copay,45,IP-CP0045,"Hospital stay, facility fee; $45 copay"
+inpatient_facility,copay,50,IP-CP0050,"Hospital stay, facility fee; $50 copay"
+inpatient_facility,copay,55,IP-CP0055,"Hospital stay, facility fee; $55 copay"
+inpatient_facility,copay,60,IP-CP0060,"Hospital stay, facility fee; $60 copay"
+inpatient_facility,copay,65,IP-CP0065,"Hospital stay, facility fee; $65 copay"
+inpatient_facility,copay,70,IP-CP0070,"Hospital stay, facility fee; $70 copay"
+inpatient_facility,copay,75,IP-CP0075,"Hospital stay, facility fee; $75 copay"
+inpatient_facility,copay,80,IP-CP0080,"Hospital stay, facility fee; $80 copay"
+inpatient_facility,copay,85,IP-CP0085,"Hospital stay, facility fee; $85 copay"
+inpatient_facility,copay,90,IP-CP0090,"Hospital stay, facility fee; $90 copay"
+inpatient_facility,copay,95,IP-CP0095,"Hospital stay, facility fee; $95 copay"
+inpatient_facility,copay,100,IP-CP0100,"Hospital stay, facility fee; $100 copay"
+inpatient_facility,copay,125,IP-CP0125,"Hospital stay, facility fee; $125 copay"
+inpatient_facility,copay,150,IP-CP0150,"Hospital stay, facility fee; $150 copay"
+inpatient_facility,copay,175,IP-CP0175,"Hospital stay, facility fee; $175 copay"
+inpatient_facility,copay,200,IP-CP0200,"Hospital stay, facility fee; $200 copay"
+inpatient_facility,copay,225,IP-CP0225,"Hospital stay, facility fee; $225 copay"
+inpatient_facility,copay,250,IP-CP0250,"Hospital stay, facility fee; $250 copay"
+inpatient_facility,copay,275,IP-CP0275,"Hospital stay, facility fee; $275 copay"
+inpatient_facility,copay,300,IP-CP0300,"Hospital stay, facility fee; $300 copay"
+inpatient_facility,copay,325,IP-CP0325,"Hospital stay, facility fee; $325 copay"
+inpatient_facility,copay,350,IP-CP0350,"Hospital stay, facility fee; $350 copay"
+inpatient_facility,copay,375,IP-CP0375,"Hospital stay, facility fee; $375 copay"
+inpatient_facility,copay,400,IP-CP0400,"Hospital stay, facility fee; $400 copay"
+inpatient_facility,copay,425,IP-CP0425,"Hospital stay, facility fee; $425 copay"
+inpatient_facility,copay,450,IP-CP0450,"Hospital stay, facility fee; $450 copay"
+inpatient_facility,copay,475,IP-CP0475,"Hospital stay, facility fee; $475 copay"
+inpatient_facility,copay,500,IP-CP0500,"Hospital stay, facility fee; $500 copay"
+inpatient_facility,copay,600,IP-CP0600,"Hospital stay, facility fee; $600 copay"
+inpatient_facility,copay,700,IP-CP0700,"Hospital stay, facility fee; $700 copay"
+inpatient_facility,copay,800,IP-CP0800,"Hospital stay, facility fee; $800 copay"
+inpatient_facility,copay,900,IP-CP0900,"Hospital stay, facility fee; $900 copay"
+inpatient_facility,copay,1000,IP-CP1000,"Hospital stay, facility fee; $1000 copay"
+inpatient_facility,copay,1100,IP-CP1100,"Hospital stay, facility fee; $1100 copay"
+inpatient_facility,copay,1200,IP-CP1200,"Hospital stay, facility fee; $1200 copay"
+inpatient_facility,copay,1300,IP-CP1300,"Hospital stay, facility fee; $1300 copay"
+inpatient_facility,copay,1400,IP-CP1400,"Hospital stay, facility fee; $1400 copay"
+inpatient_facility,copay,1500,IP-CP1500,"Hospital stay, facility fee; $1500 copay"
+inpatient_facility,coinsurance,5,IP-CI005,"Hospital stay, facility fee; 5% coinsurance"
+inpatient_facility,coinsurance,10,IP-CI010,"Hospital stay, facility fee; 10% coinsurance"
+inpatient_facility,coinsurance,15,IP-CI015,"Hospital stay, facility fee; 15% coinsurance"
+inpatient_facility,coinsurance,20,IP-CI020,"Hospital stay, facility fee; 20% coinsurance"
+inpatient_facility,coinsurance,25,IP-CI025,"Hospital stay, facility fee; 25% coinsurance"
+inpatient_facility,coinsurance,30,IP-CI030,"Hospital stay, facility fee; 30% coinsurance"
+inpatient_facility,coinsurance,35,IP-CI035,"Hospital stay, facility fee; 35% coinsurance"
+inpatient_facility,coinsurance,40,IP-CI040,"Hospital stay, facility fee; 40% coinsurance"
+inpatient_facility,coinsurance,45,IP-CI045,"Hospital stay, facility fee; 45% coinsurance"
+inpatient_facility,coinsurance,50,IP-CI050,"Hospital stay, facility fee; 50% coinsurance"
+outpatient_surgery_facility,no_charge,,OPS-NC,"Outpatient surgery, facility fee; no charge"
+outpatient_surgery_facility,not_covered,,OPS-NCOV,"Outpatient surgery, facility fee; not covered"
+outpatient_surgery_facility,copay,5,OPS-CP0005,"Outpatient surgery, facility fee; $5 copay"
+outpatient_surgery_facility,copay,10,OPS-CP0010,"Outpatient surgery, facility fee; $10 copay"
+outpatient_surgery_facility,copay,15,OPS-CP0015,"Outpatient surgery, facility fee; $15 copay"
+outpatient_surgery_facility,copay,20,OPS-CP0020,"Outpatient surgery, facility fee; $20 copay"
+outpatient_surgery_facility,copay,25,OPS-CP0025,"Outpatient surgery, facility fee; $25 copay"
+outpatient_surgery_facility,copay,30,OPS-CP0030,"Outpatient surgery, facility fee; $30 copay"
+outpatient_surgery_facility,copay,35,OPS-CP0035,"Outpatient surgery, facility fee; $35 copay"
+outpatient_surgery_facility,copay,40,OPS-CP0040,"Outpatient surgery, facility fee; $40 copay"
+outpatient_surgery_facility,copay,45,OPS-CP0045,"Outpatient surgery, facility fee; $45 copay"
+outpatient_surgery_facility,copay,50,OPS-CP0050,"Outpatient surgery, facility fee; $50 copay"
+outpatient_surgery_facility,copay,55,OPS-CP0055,"Outpatient surgery, facility fee; $55 copay"
+outpatient_surgery_facility,copay,60,OPS-CP0060,"Outpatient surgery, facility fee; $60 copay"
+outpatient_surgery_facility,copay,65,OPS-CP0065,"Outpatient surgery, facility fee; $65 copay"
+outpatient_surgery_facility,copay,70,OPS-CP0070,"Outpatient surgery, facility fee; $70 copay"
+outpatient_surgery_facility,copay,75,OPS-CP0075,"Outpatient surgery, facility fee; $75 copay"
+outpatient_surgery_facility,copay,80,OPS-CP0080,"Outpatient surgery, facility fee; $80 copay"
+outpatient_surgery_facility,copay,85,OPS-CP0085,"Outpatient surgery, facility fee; $85 copay"
+outpatient_surgery_facility,copay,90,OPS-CP0090,"Outpatient surgery, facility fee; $90 copay"
+outpatient_surgery_facility,copay,95,OPS-CP0095,"Outpatient surgery, facility fee; $95 copay"
+outpatient_surgery_facility,copay,100,OPS-CP0100,"Outpatient surgery, facility fee; $100 copay"
+outpatient_surgery_facility,copay,125,OPS-CP0125,"Outpatient surgery, facility fee; $125 copay"
+outpatient_surgery_facility,copay,150,OPS-CP0150,"Outpatient surgery, facility fee; $150 copay"
+outpatient_surgery_facility,copay,175,OPS-CP0175,"Outpatient surgery, facility fee; $175 copay"
+outpatient_surgery_facility,copay,200,OPS-CP0200,"Outpatient surgery, facility fee; $200 copay"
+outpatient_surgery_facility,copay,225,OPS-CP0225,"Outpatient surgery, facility fee; $225 copay"
+outpatient_surgery_facility,copay,250,OPS-CP0250,"Outpatient surgery, facility fee; $250 copay"
+outpatient_surgery_facility,copay,275,OPS-CP0275,"Outpatient surgery, facility fee; $275 copay"
+outpatient_surgery_facility,copay,300,OPS-CP0300,"Outpatient surgery, facility fee; $300 copay"
+outpatient_surgery_facility,copay,325,OPS-CP0325,"Outpatient surgery, facility fee; $325 copay"
+outpatient_surgery_facility,copay,350,OPS-CP0350,"Outpatient surgery, facility fee; $350 copay"
+outpatient_surgery_facility,copay,375,OPS-CP0375,"Outpatient surgery, facility fee; $375 copay"
+outpatient_surgery_facility,copay,400,OPS-CP0400,"Outpatient surgery, facility fee; $400 copay"
+outpatient_surgery_facility,copay,425,OPS-CP0425,"Outpatient surgery, facility fee; $425 copay"
+outpatient_surgery_facility,copay,450,OPS-CP0450,"Outpatient surgery, facility fee; $450 copay"
+outpatient_surgery_facility,copay,475,OPS-CP0475,"Outpatient surgery, facility fee; $475 copay"
+outpatient_surgery_facility,copay,500,OPS-CP0500,"Outpatient surgery, facility fee; $500 copay"
+outpatient_surgery_facility,copay,600,OPS-CP0600,"Outpatient surgery, facility fee; $600 copay"
+outpatient_surgery_facility,copay,700,OPS-CP0700,"Outpatient surgery, facility fee; $700 copay"
+outpatient_surgery_facility,copay,800,OPS-CP0800,"Outpatient surgery, facility fee; $800 copay"
+outpatient_surgery_facility,copay,900,OPS-CP0900,"Outpatient surgery, facility fee; $900 copay"
+outpatient_surgery_facility,copay,1000,OPS-CP1000,"Outpatient surgery, facility fee; $1000 copay"
+outpatient_surgery_facility,copay,1100,OPS-CP1100,"Outpatient surgery, facility fee; $1100 copay"
+outpatient_surgery_facility,copay,1200,OPS-CP1200,"Outpatient surgery, facility fee; $1200 copay"
+outpatient_surgery_facility,copay,1300,OPS-CP1300,"Outpatient surgery, facility fee; $1300 copay"
+outpatient_surgery_facility,copay,1400,OPS-CP1400,"Outpatient surgery, facility fee; $1400 copay"
+outpatient_surgery_facility,copay,1500,OPS-CP1500,"Outpatient surgery, facility fee; $1500 copay"
+outpatient_surgery_facility,coinsurance,5,OPS-CI005,"Outpatient surgery, facility fee; 5% coinsurance"
+outpatient_surgery_facility,coinsurance,10,OPS-CI010,"Outpatient surgery, facility fee; 10% coinsurance"
+outpatient_surgery_facility,coinsurance,15,OPS-CI015,"Outpatient surgery, facility fee; 15% coinsurance"
+outpatient_surgery_facility,coinsurance,20,OPS-CI020,"Outpatient surgery, facility fee; 20% coinsurance"
+outpatient_surgery_facility,coinsurance,25,OPS-CI025,"Outpatient surgery, facility fee; 25% coinsurance"
+outpatient_surgery_facility,coinsurance,30,OPS-CI030,"Outpatient surgery, facility fee; 30% coinsurance"
+outpatient_surgery_facility,coinsurance,35,OPS-CI035,"Outpatient surgery, facility fee; 35% coinsurance"
+outpatient_surgery_facility,coinsurance,40,OPS-CI040,"Outpatient surgery, facility fee; 40% coinsurance"
+outpatient_surgery_facility,coinsurance,45,OPS-CI045,"Outpatient surgery, facility fee; 45% coinsurance"
+outpatient_surgery_facility,coinsurance,50,OPS-CI050,"Outpatient surgery, facility fee; 50% coinsurance"
+imaging,no_charge,,IMG-NC,"Imaging (CT/PET scans, MRIs); no charge"
+imaging,not_covered,,IMG-NCOV,"Imaging (CT/PET scans, MRIs); not covered"
+imaging,copay,5,IMG-CP0005,"Imaging (CT/PET scans, MRIs); $5 copay"
+imaging,copay,10,IMG-CP0010,"Imaging (CT/PET scans, MRIs); $10 copay"
+imaging,copay,15,IMG-CP0015,"Imaging (CT/PET scans, MRIs); $15 copay"
+imaging,copay,20,IMG-CP0020,"Imaging (CT/PET scans, MRIs); $20 copay"
+imaging,copay,25,IMG-CP0025,"Imaging (CT/PET scans, MRIs); $25 copay"
+imaging,copay,30,IMG-CP0030,"Imaging (CT/PET scans, MRIs); $30 copay"
+imaging,copay,35,IMG-CP0035,"Imaging (CT/PET scans, MRIs); $35 copay"
+imaging,copay,40,IMG-CP0040,"Imaging (CT/PET scans, MRIs); $40 copay"
+imaging,copay,45,IMG-CP0045,"Imaging (CT/PET scans, MRIs); $45 copay"
+imaging,copay,50,IMG-CP0050,"Imaging (CT/PET scans, MRIs); $50 copay"
+imaging,copay,55,IMG-CP0055,"Imaging (CT/PET scans, MRIs); $55 copay"
+imaging,copay,60,IMG-CP0060,"Imaging (CT/PET scans, MRIs); $60 copay"
+imaging,copay,65,IMG-CP0065,"Imaging (CT/PET scans, MRIs); $65 copay"
+imaging,copay,70,IMG-CP0070,"Imaging (CT/PET scans, MRIs); $70 copay"
+imaging,copay,75,IMG-CP0075,"Imaging (CT/PET scans, MRIs); $75 copay"
+imaging,copay,80,IMG-CP0080,"Imaging (CT/PET scans, MRIs); $80 copay"
+imaging,copay,85,IMG-CP0085,"Imaging (CT/PET scans, MRIs); $85 copay"
+imaging,copay,90,IMG-CP0090,"Imaging (CT/PET scans, MRIs); $90 copay"
+imaging,copay,95,IMG-CP0095,"Imaging (CT/PET scans, MRIs); $95 copay"
+imaging,copay,100,IMG-CP0100,"Imaging (CT/PET scans, MRIs); $100 copay"
+imaging,copay,125,IMG-CP0125,"Imaging (CT/PET scans, MRIs); $125 copay"
+imaging,copay,150,IMG-CP0150,"Imaging (CT/PET scans, MRIs); $150 copay"
+imaging,copay,175,IMG-CP0175,"Imaging (CT/PET scans, MRIs); $175 copay"
+imaging,copay,200,IMG-CP0200,"Imaging (CT/PET scans, MRIs); $200 copay"
+imaging,copay,225,IMG-CP0225,"Imaging (CT/PET scans, MRIs); $225 copay"
+imaging,copay,250,IMG-CP0250,"Imaging (CT/PET scans, MRIs); $250 copay"
+imaging,copay,275,IMG-CP0275,"Imaging (CT/PET scans, MRIs); $275 copay"
+imaging,copay,300,IMG-CP0300,"Imaging (CT/PET scans, MRIs); $300 copay"
+imaging,copay,325,IMG-CP0325,"Imaging (CT/PET scans, MRIs); $325 copay"
+imaging,copay,350,IMG-CP0350,"Imaging (CT/PET scans, MRIs); $350 copay"
+imaging,copay,375,IMG-CP0375,"Imaging (CT/PET scans, MRIs); $375 copay"
+imaging,copay,400,IMG-CP0400,"Imaging (CT/PET scans, MRIs); $400 copay"
+imaging,copay,425,IMG-CP0425,"Imaging (CT/PET scans, MRIs); $425 copay"
+imaging,copay,450,IMG-CP0450,"Imaging (CT/PET scans, MRIs); $450 copay"
+imaging,copay,475,IMG-CP0475,"Imaging (CT/PET scans, MRIs); $475 copay"
+imaging,copay,500,IMG-CP0500,"Imaging (CT/PET scans, MRIs); $500 copay"
+imaging,copay,600,IMG-CP0600,"Imaging (CT/PET scans, MRIs); $600 copay"
+imaging,copay,700,IMG-CP0700,"Imaging (CT/PET scans, MRIs); $700 copay"
+imaging,copay,800,IMG-CP0800,"Imaging (CT/PET scans, MRIs); $800 copay"
+imaging,copay,900,IMG-CP0900,"Imaging (CT/PET scans, MRIs); $900 copay"
+imaging,copay,1000,IMG-CP1000,"Imaging (CT/PET scans, MRIs); $1000 copay"
+imaging,copay,1100,IMG-CP1100,"Imaging (CT/PET scans, MRIs); $1100 copay"
+imaging,copay,1200,IMG-CP1200,"Imaging (CT/PET scans, MRIs); $1200 copay"
+imaging,copay,1300,IMG-CP1300,"Imaging (CT/PET scans, MRIs); $1300 copay"
+imaging,copay,1400,IMG-CP1400,"Imaging (CT/PET scans, MRIs); $1400 copay"
+imaging,copay,1500,IMG-CP1500,"Imaging (CT/PET scans, MRIs); $1500 copay"
+imaging,coinsurance,5,IMG-CI005,"Imaging (CT/PET scans, MRIs); 5% coinsurance"
+imaging,coinsurance,10,IMG-CI010,"Imaging (CT/PET scans, MRIs); 10% coinsurance"
+imaging,coinsurance,15,IMG-CI015,"Imaging (CT/PET scans, MRIs); 15% coinsurance"
+imaging,coinsurance,20,IMG-CI020,"Imaging (CT/PET scans, MRIs); 20% coinsurance"
+imaging,coinsurance,25,IMG-CI025,"Imaging (CT/PET scans, MRIs); 25% coinsurance"
+imaging,coinsurance,30,IMG-CI030,"Imaging (CT/PET scans, MRIs); 30% coinsurance"
+imaging,coinsurance,35,IMG-CI035,"Imaging (CT/PET scans, MRIs); 35% coinsurance"
+imaging,coinsurance,40,IMG-CI040,"Imaging (CT/PET scans, MRIs); 40% coinsurance"
+imaging,coinsurance,45,IMG-CI045,"Imaging (CT/PET scans, MRIs); 45% coinsurance"
+imaging,coinsurance,50,IMG-CI050,"Imaging (CT/PET scans, MRIs); 50% coinsurance"
+rx_tier1_generic,no_charge,,RX1-NC,"Generic drugs, retail; no charge"
+rx_tier1_generic,not_covered,,RX1-NCOV,"Generic drugs, retail; not covered"
+rx_tier1_generic,copay,5,RX1-CP0005,"Generic drugs, retail; $5 copay"
+rx_tier1_generic,copay,10,RX1-CP0010,"Generic drugs, retail; $10 copay"
+rx_tier1_generic,copay,15,RX1-CP0015,"Generic drugs, retail; $15 copay"
+rx_tier1_generic,copay,20,RX1-CP0020,"Generic drugs, retail; $20 copay"
+rx_tier1_generic,copay,25,RX1-CP0025,"Generic drugs, retail; $25 copay"
+rx_tier1_generic,copay,30,RX1-CP0030,"Generic drugs, retail; $30 copay"
+rx_tier1_generic,copay,35,RX1-CP0035,"Generic drugs, retail; $35 copay"
+rx_tier1_generic,copay,40,RX1-CP0040,"Generic drugs, retail; $40 copay"
+rx_tier1_generic,copay,45,RX1-CP0045,"Generic drugs, retail; $45 copay"
+rx_tier1_generic,copay,50,RX1-CP0050,"Generic drugs, retail; $50 copay"
+rx_tier1_generic,copay,55,RX1-CP0055,"Generic drugs, retail; $55 copay"
+rx_tier1_generic,copay,60,RX1-CP0060,"Generic drugs, retail; $60 copay"
+rx_tier1_generic,copay,65,RX1-CP0065,"Generic drugs, retail; $65 copay"
+rx_tier1_generic,copay,70,RX1-CP0070,"Generic drugs, retail; $70 copay"
+rx_tier1_generic,copay,75,RX1-CP0075,"Generic drugs, retail; $75 copay"
+rx_tier1_generic,copay,80,RX1-CP0080,"Generic drugs, retail; $80 copay"
+rx_tier1_generic,copay,85,RX1-CP0085,"Generic drugs, retail; $85 copay"
+rx_tier1_generic,copay,90,RX1-CP0090,"Generic drugs, retail; $90 copay"
+rx_tier1_generic,copay,95,RX1-CP0095,"Generic drugs, retail; $95 copay"
+rx_tier1_generic,copay,100,RX1-CP0100,"Generic drugs, retail; $100 copay"
+rx_tier1_generic,copay,125,RX1-CP0125,"Generic drugs, retail; $125 copay"
+rx_tier1_generic,copay,150,RX1-CP0150,"Generic drugs, retail; $150 copay"
+rx_tier1_generic,copay,175,RX1-CP0175,"Generic drugs, retail; $175 copay"
+rx_tier1_generic,copay,200,RX1-CP0200,"Generic drugs, retail; $200 copay"
+rx_tier1_generic,copay,225,RX1-CP0225,"Generic drugs, retail; $225 copay"
+rx_tier1_generic,copay,250,RX1-CP0250,"Generic drugs, retail; $250 copay"
+rx_tier1_generic,copay,275,RX1-CP0275,"Generic drugs, retail; $275 copay"
+rx_tier1_generic,copay,300,RX1-CP0300,"Generic drugs, retail; $300 copay"
+rx_tier1_generic,copay,325,RX1-CP0325,"Generic drugs, retail; $325 copay"
+rx_tier1_generic,copay,350,RX1-CP0350,"Generic drugs, retail; $350 copay"
+rx_tier1_generic,copay,375,RX1-CP0375,"Generic drugs, retail; $375 copay"
+rx_tier1_generic,copay,400,RX1-CP0400,"Generic drugs, retail; $400 copay"
+rx_tier1_generic,copay,425,RX1-CP0425,"Generic drugs, retail; $425 copay"
+rx_tier1_generic,copay,450,RX1-CP0450,"Generic drugs, retail; $450 copay"
+rx_tier1_generic,copay,475,RX1-CP0475,"Generic drugs, retail; $475 copay"
+rx_tier1_generic,copay,500,RX1-CP0500,"Generic drugs, retail; $500 copay"
+rx_tier1_generic,copay,600,RX1-CP0600,"Generic drugs, retail; $600 copay"
+rx_tier1_generic,copay,700,RX1-CP0700,"Generic drugs, retail; $700 copay"
+rx_tier1_generic,copay,800,RX1-CP0800,"Generic drugs, retail; $800 copay"
+rx_tier1_generic,copay,900,RX1-CP0900,"Generic drugs, retail; $900 copay"
+rx_tier1_generic,copay,1000,RX1-CP1000,"Generic drugs, retail; $1000 copay"
+rx_tier1_generic,copay,1100,RX1-CP1100,"Generic drugs, retail; $1100 copay"
+rx_tier1_generic,copay,1200,RX1-CP1200,"Generic drugs, retail; $1200 copay"
+rx_tier1_generic,copay,1300,RX1-CP1300,"Generic drugs, retail; $1300 copay"
+rx_tier1_generic,copay,1400,RX1-CP1400,"Generic drugs, retail; $1400 copay"
+rx_tier1_generic,copay,1500,RX1-CP1500,"Generic drugs, retail; $1500 copay"
+rx_tier1_generic,coinsurance,5,RX1-CI005,"Generic drugs, retail; 5% coinsurance"
+rx_tier1_generic,coinsurance,10,RX1-CI010,"Generic drugs, retail; 10% coinsurance"
+rx_tier1_generic,coinsurance,15,RX1-CI015,"Generic drugs, retail; 15% coinsurance"
+rx_tier1_generic,coinsurance,20,RX1-CI020,"Generic drugs, retail; 20% coinsurance"
+rx_tier1_generic,coinsurance,25,RX1-CI025,"Generic drugs, retail; 25% coinsurance"
+rx_tier1_generic,coinsurance,30,RX1-CI030,"Generic drugs, retail; 30% coinsurance"
+rx_tier1_generic,coinsurance,35,RX1-CI035,"Generic drugs, retail; 35% coinsurance"
+rx_tier1_generic,coinsurance,40,RX1-CI040,"Generic drugs, retail; 40% coinsurance"
+rx_tier1_generic,coinsurance,45,RX1-CI045,"Generic drugs, retail; 45% coinsurance"
+rx_tier1_generic,coinsurance,50,RX1-CI050,"Generic drugs, retail; 50% coinsurance"
+rx_tier2_preferred_brand,no_charge,,RX2-NC,"Preferred brand drugs, retail; no charge"
+rx_tier2_preferred_brand,not_covered,,RX2-NCOV,"Preferred brand drugs, retail; not covered"
+rx_tier2_preferred_brand,copay,5,RX2-CP0005,"Preferred brand drugs, retail; $5 copay"
+rx_tier2_preferred_brand,copay,10,RX2-CP0010,"Preferred brand drugs, retail; $10 copay"
+rx_tier2_preferred_brand,copay,15,RX2-CP0015,"Preferred brand drugs, retail; $15 copay"
+rx_tier2_preferred_brand,copay,20,RX2-CP0020,"Preferred brand drugs, retail; $20 copay"
+rx_tier2_preferred_brand,copay,25,RX2-CP0025,"Preferred brand drugs, retail; $25 copay"
+rx_tier2_preferred_brand,copay,30,RX2-CP0030,"Preferred brand drugs, retail; $30 copay"
+rx_tier2_preferred_brand,copay,35,RX2-CP0035,"Preferred brand drugs, retail; $35 copay"
+rx_tier2_preferred_brand,copay,40,RX2-CP0040,"Preferred brand drugs, retail; $40 copay"
+rx_tier2_preferred_brand,copay,45,RX2-CP0045,"Preferred brand drugs, retail; $45 copay"
+rx_tier2_preferred_brand,copay,50,RX2-CP0050,"Preferred brand drugs, retail; $50 copay"
+rx_tier2_preferred_brand,copay,55,RX2-CP0055,"Preferred brand drugs, retail; $55 copay"
+rx_tier2_preferred_brand,copay,60,RX2-CP0060,"Preferred brand drugs, retail; $60 copay"
+rx_tier2_preferred_brand,copay,65,RX2-CP0065,"Preferred brand drugs, retail; $65 copay"
+rx_tier2_preferred_brand,copay,70,RX2-CP0070,"Preferred brand drugs, retail; $70 copay"
+rx_tier2_preferred_brand,copay,75,RX2-CP0075,"Preferred brand drugs, retail; $75 copay"
+rx_tier2_preferred_brand,copay,80,RX2-CP0080,"Preferred brand drugs, retail; $80 copay"
+rx_tier2_preferred_brand,copay,85,RX2-CP0085,"Preferred brand drugs, retail; $85 copay"
+rx_tier2_preferred_brand,copay,90,RX2-CP0090,"Preferred brand drugs, retail; $90 copay"
+rx_tier2_preferred_brand,copay,95,RX2-CP0095,"Preferred brand drugs, retail; $95 copay"
+rx_tier2_preferred_brand,copay,100,RX2-CP0100,"Preferred brand drugs, retail; $100 copay"
+rx_tier2_preferred_brand,copay,125,RX2-CP0125,"Preferred brand drugs, retail; $125 copay"
+rx_tier2_preferred_brand,copay,150,RX2-CP0150,"Preferred brand drugs, retail; $150 copay"
+rx_tier2_preferred_brand,copay,175,RX2-CP0175,"Preferred brand drugs, retail; $175 copay"
+rx_tier2_preferred_brand,copay,200,RX2-CP0200,"Preferred brand drugs, retail; $200 copay"
+rx_tier2_preferred_brand,copay,225,RX2-CP0225,"Preferred brand drugs, retail; $225 copay"
+rx_tier2_preferred_brand,copay,250,RX2-CP0250,"Preferred brand drugs, retail; $250 copay"
+rx_tier2_preferred_brand,copay,275,RX2-CP0275,"Preferred brand drugs, retail; $275 copay"
+rx_tier2_preferred_brand,copay,300,RX2-CP0300,"Preferred brand drugs, retail; $300 copay"
+rx_tier2_preferred_brand,copay,325,RX2-CP0325,"Preferred brand drugs, retail; $325 copay"
+rx_tier2_preferred_brand,copay,350,RX2-CP0350,"Preferred brand drugs, retail; $350 copay"
+rx_tier2_preferred_brand,copay,375,RX2-CP0375,"Preferred brand drugs, retail; $375 copay"
+rx_tier2_preferred_brand,copay,400,RX2-CP0400,"Preferred brand drugs, retail; $400 copay"
+rx_tier2_preferred_brand,copay,425,RX2-CP0425,"Preferred brand drugs, retail; $425 copay"
+rx_tier2_preferred_brand,copay,450,RX2-CP0450,"Preferred brand drugs, retail; $450 copay"
+rx_tier2_preferred_brand,copay,475,RX2-CP0475,"Preferred brand drugs, retail; $475 copay"
+rx_tier2_preferred_brand,copay,500,RX2-CP0500,"Preferred brand drugs, retail; $500 copay"
+rx_tier2_preferred_brand,copay,600,RX2-CP0600,"Preferred brand drugs, retail; $600 copay"
+rx_tier2_preferred_brand,copay,700,RX2-CP0700,"Preferred brand drugs, retail; $700 copay"
+rx_tier2_preferred_brand,copay,800,RX2-CP0800,"Preferred brand drugs, retail; $800 copay"
+rx_tier2_preferred_brand,copay,900,RX2-CP0900,"Preferred brand drugs, retail; $900 copay"
+rx_tier2_preferred_brand,copay,1000,RX2-CP1000,"Preferred brand drugs, retail; $1000 copay"
+rx_tier2_preferred_brand,copay,1100,RX2-CP1100,"Preferred brand drugs, retail; $1100 copay"
+rx_tier2_preferred_brand,copay,1200,RX2-CP1200,"Preferred brand drugs, retail; $1200 copay"
+rx_tier2_preferred_brand,copay,1300,RX2-CP1300,"Preferred brand drugs, retail; $1300 copay"
+rx_tier2_preferred_brand,copay,1400,RX2-CP1400,"Preferred brand drugs, retail; $1400 copay"
+rx_tier2_preferred_brand,copay,1500,RX2-CP1500,"Preferred brand drugs, retail; $1500 copay"
+rx_tier2_preferred_brand,coinsurance,5,RX2-CI005,"Preferred brand drugs, retail; 5% coinsurance"
+rx_tier2_preferred_brand,coinsurance,10,RX2-CI010,"Preferred brand drugs, retail; 10% coinsurance"
+rx_tier2_preferred_brand,coinsurance,15,RX2-CI015,"Preferred brand drugs, retail; 15% coinsurance"
+rx_tier2_preferred_brand,coinsurance,20,RX2-CI020,"Preferred brand drugs, retail; 20% coinsurance"
+rx_tier2_preferred_brand,coinsurance,25,RX2-CI025,"Preferred brand drugs, retail; 25% coinsurance"
+rx_tier2_preferred_brand,coinsurance,30,RX2-CI030,"Preferred brand drugs, retail; 30% coinsurance"
+rx_tier2_preferred_brand,coinsurance,35,RX2-CI035,"Preferred brand drugs, retail; 35% coinsurance"
+rx_tier2_preferred_brand,coinsurance,40,RX2-CI040,"Preferred brand drugs, retail; 40% coinsurance"
+rx_tier2_preferred_brand,coinsurance,45,RX2-CI045,"Preferred brand drugs, retail; 45% coinsurance"
+rx_tier2_preferred_brand,coinsurance,50,RX2-CI050,"Preferred brand drugs, retail; 50% coinsurance"
+rx_tier3_nonpreferred_brand,no_charge,,RX3-NC,"Non-preferred brand drugs, retail; no charge"
+rx_tier3_nonpreferred_brand,not_covered,,RX3-NCOV,"Non-preferred brand drugs, retail; not covered"
+rx_tier3_nonpreferred_brand,copay,5,RX3-CP0005,"Non-preferred brand drugs, retail; $5 copay"
+rx_tier3_nonpreferred_brand,copay,10,RX3-CP0010,"Non-preferred brand drugs, retail; $10 copay"
+rx_tier3_nonpreferred_brand,copay,15,RX3-CP0015,"Non-preferred brand drugs, retail; $15 copay"
+rx_tier3_nonpreferred_brand,copay,20,RX3-CP0020,"Non-preferred brand drugs, retail; $20 copay"
+rx_tier3_nonpreferred_brand,copay,25,RX3-CP0025,"Non-preferred brand drugs, retail; $25 copay"
+rx_tier3_nonpreferred_brand,copay,30,RX3-CP0030,"Non-preferred brand drugs, retail; $30 copay"
+rx_tier3_nonpreferred_brand,copay,35,RX3-CP0035,"Non-preferred brand drugs, retail; $35 copay"
+rx_tier3_nonpreferred_brand,copay,40,RX3-CP0040,"Non-preferred brand drugs, retail; $40 copay"
+rx_tier3_nonpreferred_brand,copay,45,RX3-CP0045,"Non-preferred brand drugs, retail; $45 copay"
+rx_tier3_nonpreferred_brand,copay,50,RX3-CP0050,"Non-preferred brand drugs, retail; $50 copay"
+rx_tier3_nonpreferred_brand,copay,55,RX3-CP0055,"Non-preferred brand drugs, retail; $55 copay"
+rx_tier3_nonpreferred_brand,copay,60,RX3-CP0060,"Non-preferred brand drugs, retail; $60 copay"
+rx_tier3_nonpreferred_brand,copay,65,RX3-CP0065,"Non-preferred brand drugs, retail; $65 copay"
+rx_tier3_nonpreferred_brand,copay,70,RX3-CP0070,"Non-preferred brand drugs, retail; $70 copay"
+rx_tier3_nonpreferred_brand,copay,75,RX3-CP0075,"Non-preferred brand drugs, retail; $75 copay"
+rx_tier3_nonpreferred_brand,copay,80,RX3-CP0080,"Non-preferred brand drugs, retail; $80 copay"
+rx_tier3_nonpreferred_brand,copay,85,RX3-CP0085,"Non-preferred brand drugs, retail; $85 copay"
+rx_tier3_nonpreferred_brand,copay,90,RX3-CP0090,"Non-preferred brand drugs, retail; $90 copay"
+rx_tier3_nonpreferred_brand,copay,95,RX3-CP0095,"Non-preferred brand drugs, retail; $95 copay"
+rx_tier3_nonpreferred_brand,copay,100,RX3-CP0100,"Non-preferred brand drugs, retail; $100 copay"
+rx_tier3_nonpreferred_brand,copay,125,RX3-CP0125,"Non-preferred brand drugs, retail; $125 copay"
+rx_tier3_nonpreferred_brand,copay,150,RX3-CP0150,"Non-preferred brand drugs, retail; $150 copay"
+rx_tier3_nonpreferred_brand,copay,175,RX3-CP0175,"Non-preferred brand drugs, retail; $175 copay"
+rx_tier3_nonpreferred_brand,copay,200,RX3-CP0200,"Non-preferred brand drugs, retail; $200 copay"
+rx_tier3_nonpreferred_brand,copay,225,RX3-CP0225,"Non-preferred brand drugs, retail; $225 copay"
+rx_tier3_nonpreferred_brand,copay,250,RX3-CP0250,"Non-preferred brand drugs, retail; $250 copay"
+rx_tier3_nonpreferred_brand,copay,275,RX3-CP0275,"Non-preferred brand drugs, retail; $275 copay"
+rx_tier3_nonpreferred_brand,copay,300,RX3-CP0300,"Non-preferred brand drugs, retail; $300 copay"
+rx_tier3_nonpreferred_brand,copay,325,RX3-CP0325,"Non-preferred brand drugs, retail; $325 copay"
+rx_tier3_nonpreferred_brand,copay,350,RX3-CP0350,"Non-preferred brand drugs, retail; $350 copay"
+rx_tier3_nonpreferred_brand,copay,375,RX3-CP0375,"Non-preferred brand drugs, retail; $375 copay"
+rx_tier3_nonpreferred_brand,copay,400,RX3-CP0400,"Non-preferred brand drugs, retail; $400 copay"
+rx_tier3_nonpreferred_brand,copay,425,RX3-CP0425,"Non-preferred brand drugs, retail; $425 copay"
+rx_tier3_nonpreferred_brand,copay,450,RX3-CP0450,"Non-preferred brand drugs, retail; $450 copay"
+rx_tier3_nonpreferred_brand,copay,475,RX3-CP0475,"Non-preferred brand drugs, retail; $475 copay"
+rx_tier3_nonpreferred_brand,copay,500,RX3-CP0500,"Non-preferred brand drugs, retail; $500 copay"
+rx_tier3_nonpreferred_brand,copay,600,RX3-CP0600,"Non-preferred brand drugs, retail; $600 copay"
+rx_tier3_nonpreferred_brand,copay,700,RX3-CP0700,"Non-preferred brand drugs, retail; $700 copay"
+rx_tier3_nonpreferred_brand,copay,800,RX3-CP0800,"Non-preferred brand drugs, retail; $800 copay"
+rx_tier3_nonpreferred_brand,copay,900,RX3-CP0900,"Non-preferred brand drugs, retail; $900 copay"
+rx_tier3_nonpreferred_brand,copay,1000,RX3-CP1000,"Non-preferred brand drugs, retail; $1000 copay"
+rx_tier3_nonpreferred_brand,copay,1100,RX3-CP1100,"Non-preferred brand drugs, retail; $1100 copay"
+rx_tier3_nonpreferred_brand,copay,1200,RX3-CP1200,"Non-preferred brand drugs, retail; $1200 copay"
+rx_tier3_nonpreferred_brand,copay,1300,RX3-CP1300,"Non-preferred brand drugs, retail; $1300 copay"
+rx_tier3_nonpreferred_brand,copay,1400,RX3-CP1400,"Non-preferred brand drugs, retail; $1400 copay"
+rx_tier3_nonpreferred_brand,copay,1500,RX3-CP1500,"Non-preferred brand drugs, retail; $1500 copay"
+rx_tier3_nonpreferred_brand,coinsurance,5,RX3-CI005,"Non-preferred brand drugs, retail; 5% coinsurance"
+rx_tier3_nonpreferred_brand,coinsurance,10,RX3-CI010,"Non-preferred brand drugs, retail; 10% coinsurance"
+rx_tier3_nonpreferred_brand,coinsurance,15,RX3-CI015,"Non-preferred brand drugs, retail; 15% coinsurance"
+rx_tier3_nonpreferred_brand,coinsurance,20,RX3-CI020,"Non-preferred brand drugs, retail; 20% coinsurance"
+rx_tier3_nonpreferred_brand,coinsurance,25,RX3-CI025,"Non-preferred brand drugs, retail; 25% coinsurance"
+rx_tier3_nonpreferred_brand,coinsurance,30,RX3-CI030,"Non-preferred brand drugs, retail; 30% coinsurance"
+rx_tier3_nonpreferred_brand,coinsurance,35,RX3-CI035,"Non-preferred brand drugs, retail; 35% coinsurance"
+rx_tier3_nonpreferred_brand,coinsurance,40,RX3-CI040,"Non-preferred brand drugs, retail; 40% coinsurance"
+rx_tier3_nonpreferred_brand,coinsurance,45,RX3-CI045,"Non-preferred brand drugs, retail; 45% coinsurance"
+rx_tier3_nonpreferred_brand,coinsurance,50,RX3-CI050,"Non-preferred brand drugs, retail; 50% coinsurance"
+rx_tier4_specialty,no_charge,,RX4-NC,Specialty drugs; no charge
+rx_tier4_specialty,not_covered,,RX4-NCOV,Specialty drugs; not covered
+rx_tier4_specialty,copay,5,RX4-CP0005,Specialty drugs; $5 copay
+rx_tier4_specialty,copay,10,RX4-CP0010,Specialty drugs; $10 copay
+rx_tier4_specialty,copay,15,RX4-CP0015,Specialty drugs; $15 copay
+rx_tier4_specialty,copay,20,RX4-CP0020,Specialty drugs; $20 copay
+rx_tier4_specialty,copay,25,RX4-CP0025,Specialty drugs; $25 copay
+rx_tier4_specialty,copay,30,RX4-CP0030,Specialty drugs; $30 copay
+rx_tier4_specialty,copay,35,RX4-CP0035,Specialty drugs; $35 copay
+rx_tier4_specialty,copay,40,RX4-CP0040,Specialty drugs; $40 copay
+rx_tier4_specialty,copay,45,RX4-CP0045,Specialty drugs; $45 copay
+rx_tier4_specialty,copay,50,RX4-CP0050,Specialty drugs; $50 copay
+rx_tier4_specialty,copay,55,RX4-CP0055,Specialty drugs; $55 copay
+rx_tier4_specialty,copay,60,RX4-CP0060,Specialty drugs; $60 copay
+rx_tier4_specialty,copay,65,RX4-CP0065,Specialty drugs; $65 copay
+rx_tier4_specialty,copay,70,RX4-CP0070,Specialty drugs; $70 copay
+rx_tier4_specialty,copay,75,RX4-CP0075,Specialty drugs; $75 copay
+rx_tier4_specialty,copay,80,RX4-CP0080,Specialty drugs; $80 copay
+rx_tier4_specialty,copay,85,RX4-CP0085,Specialty drugs; $85 copay
+rx_tier4_specialty,copay,90,RX4-CP0090,Specialty drugs; $90 copay
+rx_tier4_specialty,copay,95,RX4-CP0095,Specialty drugs; $95 copay
+rx_tier4_specialty,copay,100,RX4-CP0100,Specialty drugs; $100 copay
+rx_tier4_specialty,copay,125,RX4-CP0125,Specialty drugs; $125 copay
+rx_tier4_specialty,copay,150,RX4-CP0150,Specialty drugs; $150 copay
+rx_tier4_specialty,copay,175,RX4-CP0175,Specialty drugs; $175 copay
+rx_tier4_specialty,copay,200,RX4-CP0200,Specialty drugs; $200 copay
+rx_tier4_specialty,copay,225,RX4-CP0225,Specialty drugs; $225 copay
+rx_tier4_specialty,copay,250,RX4-CP0250,Specialty drugs; $250 copay
+rx_tier4_specialty,copay,275,RX4-CP0275,Specialty drugs; $275 copay
+rx_tier4_specialty,copay,300,RX4-CP0300,Specialty drugs; $300 copay
+rx_tier4_specialty,copay,325,RX4-CP0325,Specialty drugs; $325 copay
+rx_tier4_specialty,copay,350,RX4-CP0350,Specialty drugs; $350 copay
+rx_tier4_specialty,copay,375,RX4-CP0375,Specialty drugs; $375 copay
+rx_tier4_specialty,copay,400,RX4-CP0400,Specialty drugs; $400 copay
+rx_tier4_specialty,copay,425,RX4-CP0425,Specialty drugs; $425 copay
+rx_tier4_specialty,copay,450,RX4-CP0450,Specialty drugs; $450 copay
+rx_tier4_specialty,copay,475,RX4-CP0475,Specialty drugs; $475 copay
+rx_tier4_specialty,copay,500,RX4-CP0500,Specialty drugs; $500 copay
+rx_tier4_specialty,copay,600,RX4-CP0600,Specialty drugs; $600 copay
+rx_tier4_specialty,copay,700,RX4-CP0700,Specialty drugs; $700 copay
+rx_tier4_specialty,copay,800,RX4-CP0800,Specialty drugs; $800 copay
+rx_tier4_specialty,copay,900,RX4-CP0900,Specialty drugs; $900 copay
+rx_tier4_specialty,copay,1000,RX4-CP1000,Specialty drugs; $1000 copay
+rx_tier4_specialty,copay,1100,RX4-CP1100,Specialty drugs; $1100 copay
+rx_tier4_specialty,copay,1200,RX4-CP1200,Specialty drugs; $1200 copay
+rx_tier4_specialty,copay,1300,RX4-CP1300,Specialty drugs; $1300 copay
+rx_tier4_specialty,copay,1400,RX4-CP1400,Specialty drugs; $1400 copay
+rx_tier4_specialty,copay,1500,RX4-CP1500,Specialty drugs; $1500 copay
+rx_tier4_specialty,coinsurance,5,RX4-CI005,Specialty drugs; 5% coinsurance
+rx_tier4_specialty,coinsurance,10,RX4-CI010,Specialty drugs; 10% coinsurance
+rx_tier4_specialty,coinsurance,15,RX4-CI015,Specialty drugs; 15% coinsurance
+rx_tier4_specialty,coinsurance,20,RX4-CI020,Specialty drugs; 20% coinsurance
+rx_tier4_specialty,coinsurance,25,RX4-CI025,Specialty drugs; 25% coinsurance
+rx_tier4_specialty,coinsurance,30,RX4-CI030,Specialty drugs; 30% coinsurance
+rx_tier4_specialty,coinsurance,35,RX4-CI035,Specialty drugs; 35% coinsurance
+rx_tier4_specialty,coinsurance,40,RX4-CI040,Specialty drugs; 40% coinsurance
+rx_tier4_specialty,coinsurance,45,RX4-CI045,Specialty drugs; 45% coinsurance
+rx_tier4_specialty,coinsurance,50,RX4-CI050,Specialty drugs; 50% coinsurance
+prior_auth_imaging,flag,true,PA-IMG-Y,Prior authorization required for imaging; yes
+prior_auth_imaging,flag,false,PA-IMG-N,Prior authorization required for imaging; no
+prior_auth_inpatient,flag,true,PA-IP-Y,Prior authorization required for a hospital stay; yes
+prior_auth_inpatient,flag,false,PA-IP-N,Prior authorization required for a hospital stay; no
