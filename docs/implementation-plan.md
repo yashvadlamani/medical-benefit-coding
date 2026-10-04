@@ -4,8 +4,6 @@ AI-assisted benefit coding for health insurance benefit operations: an AI pipeli
 
 **AI drafts and humans decide.** Nothing loads to the claims system without passing automated checks and a coder's approval.
 
-> Confidential. For internal discussion. Source: *Implementation Plan: Prototype to Production* (October 2026).
-
 | Phase | Duration | Outcome |
 | --- | --- | --- |
 | Phase 1: Prototype | 4 weeks | Live demo and scorecard; go/no-go decision |

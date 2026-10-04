@@ -36,4 +36,4 @@ Targets for the production release:
 
 ## License
 
-Copyright (c) 2026 Yash Vadlamani. All rights reserved. See [LICENSE](LICENSE).
+Copyright (c) 2026 Repository Owner. All rights reserved. See [LICENSE](LICENSE).
