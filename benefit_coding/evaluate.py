@@ -1,10 +1,9 @@
 """Score extracted fields against the values published in the CMS Exchange Public Use Files."""
 import csv
-import json
 import re
 from collections import defaultdict
 
-from . import config
+from . import config, store
 from .fields import AMOUNT, COST_SHARE, FIELDS
 
 GOLDEN = config.DATA / "golden" / "2026"
@@ -91,10 +90,9 @@ def score(plan_ids, complexity):
     rows, mismatches = [], []
     cited = total_values = 0
     for plan_id in plan_ids:
-        path = config.OUTPUT / "extracted" / f"{plan_id}.json"
-        if not path.exists():
+        extraction = store.read_json(f"extracted/{plan_id}.json")
+        if extraction is None:
             continue
-        extraction = json.loads(path.read_text(encoding="utf-8"))
         expected = golden_plan(plan_id)
         for item in extraction["fields"]:
             if item["status"] != "not_found":

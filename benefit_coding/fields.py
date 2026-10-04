@@ -39,3 +39,32 @@ FIELDS = [
     Field("prior_auth_inpatient", FLAG, "PA-IP", "Prior authorization required for a hospital stay"),
 ]
 BY_NAME = {f.name: f for f in FIELDS}
+
+
+def describe(item):
+    """An extracted field's value in plain words, for reviewers and the judge."""
+    status = item["status"]
+    if status == "not_found":
+        return "Not stated"
+    if status == "not_applicable":
+        return "Not applicable"
+    if status == "not_covered":
+        return "Not covered"
+    if status == "no_charge":
+        return "No charge"
+    kind = BY_NAME[item["field"]].kind
+    if kind == AMOUNT:
+        return f"${item['amount']:,.0f}"
+    if kind == FLAG:
+        return "Required" if item["flag"] else "Not required"
+    parts = []
+    if item["copay"]:
+        parts.append(f"${item['copay']:,.0f} copay")
+    if item["coinsurance_pct"]:
+        parts.append(f"{item['coinsurance_pct']:g}% coinsurance")
+    text = " + ".join(parts)
+    if item["deductible_applies"] is True:
+        text += ", after deductible"
+    elif item["deductible_applies"] is False:
+        text += ", deductible does not apply"
+    return text

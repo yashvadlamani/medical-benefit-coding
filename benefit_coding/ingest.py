@@ -1,10 +1,9 @@
 """Step 1. Ingest a plan document: read its text with Azure Document Intelligence, classify it, split it."""
-import json
 import re
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
-from . import config, ocr
+from . import ocr, store
 
 DOCUMENT_TYPES = {
     "sbc": ["summary of benefits and coverage", "important questions", "common medical event"],
@@ -107,12 +106,8 @@ def ingest(path, doc_id=None):
 
 
 def save(document):
-    out = config.OUTPUT / "ingested" / f"{document.doc_id}.json"
-    out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(asdict(document), indent=1), encoding="utf-8")
-    return out
+    store.write_json(f"ingested/{document.doc_id}.json", asdict(document))
 
 
 def load(doc_id):
-    data = json.loads((config.OUTPUT / "ingested" / f"{doc_id}.json").read_text(encoding="utf-8"))
-    return Document(**data)
+    return Document(**store.read_json(f"ingested/{doc_id}.json"))

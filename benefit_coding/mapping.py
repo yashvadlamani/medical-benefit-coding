@@ -10,7 +10,7 @@ from collections import Counter
 
 from azure.data.tables import TableServiceClient
 
-from . import config
+from . import config, store
 from .fields import AMOUNT, BY_NAME, COST_SHARE, FLAG
 
 
@@ -139,7 +139,7 @@ def map_plan(extraction, library=None):
 
 
 def save(coded):
-    """Write the coded plan to the codedplans table, and to ./output for inspection."""
+    """Write the coded plan to the codedplans table, and to blob storage for the review app."""
     plan_id = coded["doc_id"]
     batch = [("upsert", {
         "PartitionKey": plan_id[:5], "RowKey": f"{plan_id}:{f['field']}", "plan_id": plan_id, "field": f["field"],
@@ -149,7 +149,4 @@ def save(coded):
     }) for f in coded["fields"]]
     _table(PLANS_TABLE).submit_transaction(batch)
 
-    out = config.OUTPUT / "coded" / f"{plan_id}.json"
-    out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(coded, indent=1), encoding="utf-8")
-    return out
+    store.write_json(f"coded/{plan_id}.json", coded)

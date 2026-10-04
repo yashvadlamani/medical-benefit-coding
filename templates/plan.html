@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% block title %}{{ meta.plan_name or meta.plan_id }} · Benefit coding review{% endblock %}
+{% block content %}
+<p class="crumb"><a href="{{ url_for('index') }}">Plans</a> / {{ meta.plan_id }}</p>
+<h1>{{ meta.plan_name or meta.plan_id }}
+  {% if meta.seeded %}<span class="pill warn">Seeded error demo</span>{% endif %}</h1>
+<p class="lead">{{ meta.issuer }}{% if meta.state %} · {{ meta.state }}{% endif %}{% if meta.metal %} · {{ meta.metal }}{% endif %}{% if meta.complexity %} · {{ meta.complexity }} design{% endif %}</p>
+
+{% set error = request.args.get('error') %}
+{% if error == 'name' %}<p class="alert">Enter your reviewer name at the top of the page before recording a decision.</p>{% endif %}
+{% if error == 'edit' %}<p class="alert">An edit needs a corrected value or a corrected code.</p>{% endif %}
+{% if error == 'pending' %}<p class="alert">This plan cannot be approved yet: {{ pending|length }} flagged field(s) still need an approve or edit decision.</p>{% endif %}
+
+<section class="summary">
+  <div class="card">
+    <div class="big {{ 'bad' if validated.summary.failed else 'good' }}">{{ validated.summary.failed }}</div>
+    <div>failed checks</div>
+  </div>
+  <div class="card"><div class="big">{{ validated.summary.warnings }}</div><div>warnings</div></div>
+  <div class="card"><div class="big">{{ validated.summary.attention }}</div><div>fields to review</div></div>
+  <div class="card"><div class="big">{{ pending|length }}</div><div>still undecided</div></div>
+  <div class="card wide">
+    {% if plan_decision and plan_decision.action in ('approve', 'reject') %}
+      <div><span class="pill {{ 'pass' if plan_decision.action == 'approve' else 'fail' }}">{{ 'Approved' if plan_decision.action == 'approve' else 'Rejected' }}</span>
+        by {{ plan_decision.reviewer }} · {{ plan_decision.timestamp }}</div>
+      <form method="post" action="{{ url_for('decide_plan', plan_id=meta.plan_id) }}">
+        <button name="action" value="reopen">Reopen</button>
+      </form>
+    {% else %}
+      <form method="post" action="{{ url_for('decide_plan', plan_id=meta.plan_id) }}" class="plan-actions">
+        <button class="primary" name="action" value="approve" {% if pending %}disabled title="Decide every flagged field first"{% endif %}>Approve plan</button>
+        <button name="action" value="reject">Reject plan</button>
+      </form>
+      <div class="sub">{% if pending %}Blocked until every flagged field is approved or edited.{% else %}All flagged fields are decided.{% endif %}</div>
+    {% endif %}
+  </div>
+</section>
+
+<div class="split">
+  <section class="pane source">
+    <h2>Source document</h2>
+    <nav class="pages">
+      {% for n in range(1, page_count + 1) %}
+        <a class="{{ 'on' if n == page_number }}" href="{{ url_for('plan', plan_id=meta.plan_id, page=n, field=selected.name if selected else None) }}">{{ n }}</a>
+      {% endfor %}
+    </nav>
+    {% if selected %}
+      <p class="sub">Showing page {{ page_number }}. Highlighted: the passage cited for <strong>{{ selected.description }}</strong>.</p>
+    {% else %}
+      <p class="sub">Showing page {{ page_number }}. Choose "Show source" on a field to highlight its cited passage.</p>
+    {% endif %}
+    <pre class="doc">{{ source }}</pre>
+  </section>
+
+  <section class="pane fields">
+    <h2>Proposed fields and codes</h2>
+    {% for r in rows %}
+    <article id="{{ r.name }}" class="field {{ 'flag' if r.attention }} {{ 'sel' if selected and selected.name == r.name }}">
+      <div class="row">
+        <div>
+          <div class="fname">{{ r.description }}</div>
+          <div class="value">{{ r.value }}</div>
+          <div class="codes">
+            {% for c in r.codes %}<code>{{ c }}</code>{% else %}<span class="sub">No code assigned</span>{% endfor %}
+            {% if r.parameters.amount is defined %}<span class="sub">amount {{ "${:,.0f}".format(r.parameters.amount) }}</span>{% endif %}
+          </div>
+        </div>
+        <div class="meta">
+          <span class="pill {{ 'pass' if r.confidence >= 0.8 else 'warn' }}">confidence {{ '%.2f'|format(r.confidence) }}</span>
+          {% if r.judge %}<span class="pill {{ 'pass' if r.judge.verdict == 'supported' else 'fail' if r.judge.verdict == 'not_supported' else 'warn' }}">judge: {{ r.judge.verdict.replace('_', ' ') }}</span>{% endif %}
+          {% if r.page %}<a href="{{ url_for('plan', plan_id=meta.plan_id, field=r.name) }}#{{ r.name }}">Show source (p. {{ r.page }})</a>{% endif %}
+        </div>
+      </div>
+      {% if r.quote %}<blockquote>{{ r.quote }}</blockquote>{% endif %}
+      {% if r.reasons %}
+        <ul class="reasons">{% for reason in r.reasons %}<li>{{ reason }}</li>{% endfor %}</ul>
+      {% endif %}
+      {% if r.suggestions %}<div class="sub">Suggested codes: {% for s in r.suggestions %}<code>{{ s }}</code> {% endfor %}</div>{% endif %}
+
+      {% if r.decision %}
+        <div class="decision">
+          <span class="pill {{ 'pass' if r.decision.action == 'approve' else 'fail' if r.decision.action == 'reject' else 'warn' }}">{{ r.decision.action }}</span>
+          {{ r.decision.reviewer }} · {{ r.decision.timestamp }}
+          {% if r.decision.new_value or r.decision.new_codes %}· corrected to <strong>{{ r.decision.new_value }}</strong> <code>{{ r.decision.new_codes }}</code>{% endif %}
+          {% if r.decision.note %}· "{{ r.decision.note }}"{% endif %}
+        </div>
+      {% endif %}
+      <details {% if r.attention and not r.decision %}open{% endif %}>
+        <summary>{{ 'Change decision' if r.decision else 'Decide' }}</summary>
+        <form method="post" action="{{ url_for('decide_field', plan_id=meta.plan_id, field=r.name) }}" class="decide">
+          <input name="new_value" placeholder="Corrected value (for edit)" maxlength="200">
+          <input name="new_codes" placeholder="Corrected code (for edit)" maxlength="200">
+          <input name="note" placeholder="Note (optional)" maxlength="500">
+          <button class="primary" name="action" value="approve">Approve</button>
+          <button name="action" value="edit">Save edit</button>
+          <button name="action" value="reject">Reject</button>
+        </form>
+      </details>
+    </article>
+    {% endfor %}
+  </section>
+</div>
+
+<section>
+  <h2>Automated checks</h2>
+  {% if validated.checks %}
+  <table class="grid">
+    <thead><tr><th>Result</th><th>Check</th><th>Field</th><th>Detail</th></tr></thead>
+    <tbody>
+      {% for c in validated.checks %}
+      <tr>
+        <td><span class="pill {{ 'fail' if c.status == 'fail' else 'warn' }}">{{ c.status }}</span></td>
+        <td>{{ c.check.replace('_', ' ') }}</td>
+        <td><a href="{{ url_for('plan', plan_id=meta.plan_id, field=c.field) }}#{{ c.field }}">{{ c.field }}</a></td>
+        <td>{{ c.detail }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}<p>All checks passed.</p>{% endif %}
+</section>
+
+<section>
+  <h2>Test claims</h2>
+  <p class="sub">Each claim is priced from the coded values as the first claim of the year. Allowed amounts are illustrative.</p>
+  <table class="grid">
+    <thead><tr><th>Scenario</th><th class="num">Allowed</th><th class="num">Member pays</th><th class="num">Plan pays</th><th>How it was priced</th></tr></thead>
+    <tbody>
+      {% for c in validated.test_claims %}
+      <tr>
+        <td>{{ c.scenario }}</td>
+        <td class="num">{{ "${:,.0f}".format(c.allowed) }}</td>
+        <td class="num">{% if c.member_cost is none %}<span class="pill fail">n/a</span>{% else %}{{ "${:,.2f}".format(c.member_cost) }}{% endif %}</td>
+        <td class="num">{% if c.plan_pays is not none %}{{ "${:,.2f}".format(c.plan_pays) }}{% endif %}</td>
+        <td>{{ c.explanation }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Audit trail</h2>
+  {% if audit %}
+  <table class="grid">
+    <thead><tr><th>When (UTC)</th><th>Reviewer</th><th>Target</th><th>Action</th><th>AI value</th><th>AI code</th><th>Corrected to</th><th>Note</th></tr></thead>
+    <tbody>
+      {% for a in audit %}
+      <tr>
+        <td>{{ a.timestamp }}</td><td>{{ a.reviewer }}</td>
+        <td>{{ 'Plan' if a.target == '_plan' else a.target }}</td><td>{{ a.action }}</td>
+        <td>{{ a.ai_value }}</td><td>{{ a.ai_codes }}</td>
+        <td>{{ a.new_value }} {{ a.new_codes }}</td><td>{{ a.note }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}<p>No decisions recorded yet.</p>{% endif %}
+</section>
+{% endblock %}

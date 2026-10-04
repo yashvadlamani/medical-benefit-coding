@@ -4,7 +4,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
-OUTPUT = ROOT / "output"
 CODE_LIBRARY = Path(__file__).resolve().parent / "code_library.csv"
 
 
