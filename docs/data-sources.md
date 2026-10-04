@@ -10,6 +10,8 @@ The prototype runs on public documents only. They are downloaded by [`ingest/dow
 | Storage account | `medbencodingf946de69` (Standard LRS, public access disabled) |
 | Container | `prototype-docs` |
 
+The same resource group also holds the Azure AI Services resource used by the pipeline; see [Services used](pipeline.md#services-used) for the full list of Azure and external services.
+
 ## Folder structure
 
 ```

@@ -26,6 +26,20 @@ flowchart TD
 | 5. Review | Coders approve, edit or reject; low-confidence fields and failed validations always stop here |
 | 6. Load | Approved codes loaded by API or generated load file; source, AI output and reviewer kept as an audit trail |
 
+## Services by stage
+
+| Stage | Prototype (built or planned) | Status |
+| --- | --- | --- |
+| Document store | Azure Blob Storage (`medbencodingf946de69` / `prototype-docs`); sources are the CMS Exchange Public Use Files and insurer websites | Built |
+| 1. Ingest | PyMuPDF for digital PDFs; Azure Document Intelligence (`prebuilt-read`) for scans; rule-based classification and section splitting | Built |
+| 2. Extract | Azure OpenAI (`gpt-5-mini`, deployment `extract` on the `medbencoding-ai` resource) with structured JSON output | Built |
+| 3. Map | Local rules engine and code library lookup table; no external service | Built |
+| 4. Validate | Local rules-based cost calculator and SBC reconciliation; no external service planned | Not built |
+| 5. Review | Lightweight web review screen, run locally | Not built |
+| 6. Load | Client claims system by API or load file | Production phase |
+
+Resource names, API versions and cost notes are in [pipeline.md](pipeline.md#services-used).
+
 The prototype builds stages 1 to 5 against sample data with a simulated claims calculator. The production build adds the real claims-system load (stage 6), the learning loop, and enterprise hardening.
 
 See the [implementation plan](implementation-plan.md) for delivery phases, compliance, testing, and success metrics.

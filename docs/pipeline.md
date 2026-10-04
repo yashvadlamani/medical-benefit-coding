@@ -14,7 +14,7 @@ python -m benefit_coding evaluate            # writes docs/accuracy-report.md
 python -m pytest tests
 ```
 
-Settings come from a git-ignored `.env` file; see [`.env.example`](../.env.example). One Azure AI Services resource (`medbencoding-ai` in `medical-benefit-coding-rg`) provides both the LLM deployment (`extract`, gpt-5-mini) and OCR.
+Settings come from a git-ignored `.env` file; see [`.env.example`](../.env.example). The Azure resources it points to are listed under [Services used](#services-used).
 
 Results are written to `./output` (git-ignored):
 
@@ -23,6 +23,39 @@ Results are written to `./output` (git-ignored):
 | `output/ingested/<plan>.json` | Page text, document type, sections |
 | `output/extracted/<plan>.json` | One record per field: value, citation, confidence, review flag |
 | `output/coded/<plan>.json` | One record per field: system codes, parameters, suggestions, review flag |
+
+## Services used
+
+Everything runs from a local Python process. It calls two Azure resources, both in resource group `medical-benefit-coding-rg`, and downloads source documents from public websites. No member data or client data is sent anywhere.
+
+| Step | Service | Type | Resource / detail | Used for |
+| --- | --- | --- | --- | --- |
+| Data collection | CMS Exchange Public Use Files (`download.cms.gov`, `cms.gov`) | External, public | Plan year 2026 files, data dictionaries, sample SBC | Plan list, SBC links, published cost-sharing values (answer key) |
+| Data collection | Insurer websites (`alabamablue.com`, `mountainhealth.coop`, `sbc.anthem.com`, `file.anthem.com`, `securityhealth.org`) | External, public | SBC and brochure PDFs | Source documents for the 25 plans |
+| Data collection | Azure Blob Storage | Azure | Account `medbencodingf946de69`, container `prototype-docs`, Standard LRS, Central US, public access off | Stores the downloaded documents, answer key and manifest |
+| 1. Ingest | PyMuPDF | Local library | | Reads the text layer of digital PDFs |
+| 1. Ingest | Azure Document Intelligence | Azure | Resource `medbencoding-ai` (Azure AI Services, S0, East US 2), `prebuilt-read` model, API `2024-11-30` | OCR, only when a PDF has no usable text layer |
+| 1. Ingest | None | Local code | | Document classification and section splitting are rule-based |
+| 2. Extract | Azure OpenAI | Azure | Resource `medbencoding-ai`, deployment `extract`, model `gpt-5-mini` version `2025-08-07`, Global Standard, API `2024-10-21`, called through the `openai` Python SDK | Structured extraction of the 22 fields with quotes and confidence |
+| 2. Extract | None | Local code | | Citation check and review flag |
+| 3. Map | None | Local code | `benefit_coding/code_library.csv` | Lookup of system codes; no network calls |
+| Scoring | None | Local code | Answer key in `data/golden/` | Accuracy report |
+
+Supporting tools:
+
+| Tool | Used for |
+| --- | --- |
+| Azure CLI (`az`) | Creating the resources; uploading documents to Blob Storage with `--upload` |
+| `curl` | Downloading the public documents |
+| GitHub | Source repository; documents and outputs are not stored there |
+| `pytest` | Unit tests; they make no network calls |
+
+Notes:
+
+- **Authentication:** the pipeline uses the AI resource's key from the git-ignored `.env` file. Blob uploads use the logged-in Azure CLI account.
+- **What leaves the machine:** step 2 sends the text of the SBC sections to Azure OpenAI; step 1 sends the whole PDF to Document Intelligence only when OCR is needed. Both are public documents.
+- **Cost:** both AI services are pay-per-use with no idle charge. A full 25-plan run uses about 100k input and 160k output tokens. OCR is billed per page and was used for one 7-page test document.
+- **Separate from HCM-Agent:** none of these resources are shared with the `clara-rg` resource group.
 
 ## Step 1: Ingest ([`ingest.py`](../benefit_coding/ingest.py), [`ocr.py`](../benefit_coding/ocr.py))
 
