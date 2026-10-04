@@ -9,7 +9,7 @@ The prototype runs on public documents only. They are downloaded by [`ingest/dow
 | Resource group | `medical-benefit-coding-rg` (Central US) |
 | Storage account | `medbencodingf946de69` (Standard LRS, public access disabled) |
 | Container | `prototype-docs` |
-| Tables | `codelibrary`, `codedplans` (pipeline step 3) |
+| Tables | `codelibrary`, `codedplans` (step 3); `reviewdecisions`, `audittrail` (step 5) |
 
 The same resource group also holds the Azure AI Services resource used by the pipeline; see [Services used](pipeline.md#services-used) for the full list of Azure and external services.
 
