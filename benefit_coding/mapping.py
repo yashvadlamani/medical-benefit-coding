@@ -7,6 +7,7 @@ The code library and the codes assigned to each plan are held in Azure Table Sto
 import csv
 import json
 from collections import Counter
+from functools import lru_cache
 
 from azure.data.tables import TableServiceClient
 
@@ -18,6 +19,7 @@ LIBRARY_TABLE = "codelibrary"
 PLANS_TABLE = "codedplans"
 
 
+@lru_cache(maxsize=None)
 def _table(name):
     service = TableServiceClient.from_connection_string(config.setting("AZURE_STORAGE_CONNECTION_STRING"))
     return service.create_table_if_not_exists(name)
