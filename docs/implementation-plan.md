@@ -67,39 +67,63 @@ The approval gate is the only decision point. If the demo misses its criteria, t
 
 ## Phase 1: Prototype (weeks 1 to 4)
 
-The prototype shows AI turning 25 real plan documents into proposed benefit codes, with citations, a review screen, and simulated claim outcomes. It ends in a go/no-go demo.
+The prototype shows AI turning 25 real, publicly available plan documents into proposed benefit codes, with citations, a review screen, and simulated claim outcomes. It ends in a go/no-go demo.
+
+No client documents or system codes are available yet, so every prototype step runs on public sources. Client data replaces them in Phase 2 without changing the pipeline.
 
 ### Scope
 
-- 25 historical small-group medical plans with verified codes (15 simple, 10 moderate)
+- 25 small-group (SHOP) medical plans from the federal exchange, each with a public SBC and published cost-sharing values to score against (15 simple, 10 moderate), drawn from several insurers
 - About 20 fields per plan: in- and out-of-network deductibles and OOP max, PCP and specialist copays, preventive, ER, urgent care, inpatient, outpatient surgery, imaging, Rx tiers 1 to 4, prior auth flags
-- Plan documents only, no member PHI, on a HIPAA-eligible LLM service under a BAA
-- **Out of scope:** live claims-system integration, custom plans, dental and vision
+- Public plan documents only: no member PHI and no client data, so no BAA is needed until client documents are introduced
+- **Out of scope:** live claims-system integration, client code libraries, custom plans, dental and vision
+
+### Public data sources
+
+| Pipeline step | What the prototype needs | Public source |
+| --- | --- | --- |
+| 1. Ingest | SBC documents | SBC PDFs published by insurers, linked from the CMS Exchange Plan Attributes Public Use File |
+| 1. Ingest | Long SPD-style documents | Federal employee plan brochures (OPM); state employee and public university plan documents |
+| 1. Ingest | Benefit grids | State exchange standard benefit designs (for example Covered California) |
+| 1. Ingest | Riders and scanned documents | Not published: synthetic riders written against a real plan, and real SBCs degraded into scan-like images |
+| 2. Extract | Verified values to score against | CMS Exchange Benefits and Cost Sharing and Plan Attributes Public Use Files (copays, coinsurance, deductibles, OOP maximums per plan) |
+| 3. Map | Target code system | A placeholder code table built on public benefit categories: X12 service type codes or the CMS plans-and-benefits template fields |
+| 4. Validate | SBC reconciliation | Coded values compared with the same public SBC; mismatches seeded by altering one value in a copy |
+| 4. Validate | Expected test-claim results | The Coverage Examples printed on every SBC (having a baby, managing type 2 diabetes, simple fracture) |
+| 4. Validate | Plausibility check | CMS Actuarial Value Calculator |
+| 5. Review | Reviewers and baseline time | Not public: internal reviewers time themselves coding a plan by hand from the SBC, then with the tool |
+
+Limits of public data, to state openly in the pitch:
+
+- Published values are the insurer's filed cost sharing, not a client's claims-system codes. The code table is a stand-in each client replaces with its own.
+- Public SBCs are clean digital PDFs. OCR handling is shown on degraded copies, not on real broker scans.
+- Review-time and "would use it daily" results come from internal reviewers until client coders take part.
+- Exchange file layouts and SBC links change yearly and must be confirmed in week 1.
 
 ### Prototype stack
 
 - Enterprise LLM with structured JSON output for extraction
 - Python service for parsing, OCR, extraction, and code mapping
-- Code library as a simple lookup table (field, value, system code)
+- Code library as a simple lookup table (field, value, system code), filled with placeholder codes based on public benefit categories
 - Lightweight web review screen: source document beside proposed fields and codes
-- Rules-based cost calculator standing in for the claims system, pricing 8 claim scenarios per plan
+- Rules-based cost calculator standing in for the claims system, pricing 8 claim scenarios per plan and checked against the SBC Coverage Examples
 
 ### Weekly plan
 
 | Week | Focus | Deliverable |
 | --- | --- | --- |
-| 1 | Data and setup | 25 plans and verified codes collected; field list and code table agreed; environment approved; baseline review time measured |
-| 2 | Extraction | All fields extracted with citations and confidence; first accuracy report |
-| 3 | Mapping, checks, review screen | Fields mapped to codes; SBC reconciliation and claim calculator working; review screen usable |
-| 4 | Tune and demo | Misses fixed; final scorecard; coders time their reviews; live demo |
+| 1 | Data and setup | Exchange Public Use Files downloaded and SBC links confirmed; 25 plans selected and their SBCs collected; golden dataset built from the published values; field list and placeholder code table agreed; manual baseline review time measured |
+| 2 | Extraction | All fields extracted from the public SBCs with citations and confidence; first accuracy report against the published values |
+| 3 | Mapping, checks, review screen | Fields mapped to placeholder codes; SBC reconciliation working; claim calculator matching the SBC Coverage Examples; review screen usable |
+| 4 | Tune and demo | Misses fixed; synthetic rider and scanned-copy cases added; final scorecard; reviewers time their reviews; live demo |
 
 ### Demo script (20 minutes)
 
-1. Upload an SBC the system has never seen.
+1. Upload a public SBC the system has never seen, from an insurer outside the 25-plan set.
 2. Fields populate, each with a confidence score and its highlighted source sentence.
 3. Low-confidence fields are flagged, and a seeded SBC mismatch is caught.
 4. A coder edits one field and approves; the audit trail records the change.
-5. Test claims (preventive, specialist, ER, MRI, generic and specialty Rx) show member cost for each.
+5. Test claims (preventive, specialist, ER, MRI, generic and specialty Rx) show member cost for each, alongside the SBC's own Coverage Examples.
 6. Close on the scorecard: accuracy by field, review time versus today, plans needing no edits.
 
 ### Approval criteria for Phase 2
@@ -112,6 +136,8 @@ The prototype shows AI turning 25 real plan documents into proposed benefit code
 | Review time per simple plan | Under 15 minutes |
 | Seeded SBC mismatches caught | All |
 | Coder verdict | Majority would use it daily |
+
+Accuracy is scored against the published exchange values. Review time and coder verdict come from internal reviewers during the prototype and are re-measured with client coders once a client takes part.
 
 ## Phase 2: Production build (about 8 weeks)
 
@@ -143,7 +169,7 @@ The prototype avoids member PHI entirely. The production build adds the controls
 
 | Requirement | Prototype | Production |
 | --- | --- | --- |
-| HIPAA | Plan documents only, BAA with LLM provider | Encryption at rest and in transit, access logging, minimum necessary access |
+| HIPAA | Public plan documents only, no PHI or client data; BAA required before any client document is used | Encryption at rest and in transit, access logging, minimum necessary access |
 | ACA / SBC consistency | SBC reconciliation demonstrated | Mismatch blocks the load |
 | Mental health parity (MHPAEA) | Not in scope | Automated cost-sharing comparison |
 | State mandates | Not in scope | Rules for situs states of the first LOB |
@@ -155,9 +181,9 @@ The prototype avoids member PHI entirely. The production build adds the controls
 
 A coded plan passes only when test claims pay exactly as the plan document says they should.
 
-1. **Golden dataset.** 25 verified plans for the prototype, grown to 200 for production, covering simple and moderate designs. Every change is scored against it.
+1. **Golden dataset.** 25 public exchange plans scored against CMS-published values for the prototype, grown to 200 client-verified plans for production, covering simple and moderate designs. Every change is scored against it.
 2. **Field-level accuracy.** Precision and recall per field (deductible, copay, coinsurance, OOP max, prior auth, Rx tiers), not just an overall score.
-3. **Test claims.** Standard scenarios per plan (preventive, specialist, ER, MRI, generic and specialty Rx, out-of-network) must produce the expected member cost.
+3. **Test claims.** Standard scenarios per plan (preventive, specialist, ER, MRI, generic and specialty Rx, out-of-network) must produce the expected member cost. In the prototype, the SBC Coverage Examples supply the expected totals.
 4. **SBC reconciliation.** Coded values compared to the issued SBC line by line; any mismatch blocks the load.
 5. **Parallel run.** For two weeks before cutover, coders code new groups both ways; outputs are compared.
 6. **Post-launch audit.** Sample 10% of approved plans monthly and track claim adjustments traced to coding.
@@ -216,14 +242,15 @@ Add lines of business one at a time, then complex plans, dental, and vision, eac
 To start the prototype:
 
 - [ ] Sponsor approval for the 4-week prototype
-- [ ] Access to 25 historical plans with verified codes (SBCs, grids, current system codes)
-- [ ] A few hours a week from two senior benefit coders to validate output
-- [ ] Approved HIPAA-eligible LLM environment under a BAA
+- [ ] CMS Exchange Public Use Files downloaded and SBC links confirmed for the 25 selected plans
+- [ ] A few hours a week from two reviewers with benefit-coding experience to validate output
+- [ ] LLM API access (no BAA needed while only public documents are used)
 - [ ] Demo date booked with decision makers for the end of week 4
 
 To start the production build (after the demo):
 
 - [ ] Go decision based on the approval criteria
+- [ ] Client plan documents with verified codes, the client's code library, and a HIPAA-eligible LLM environment under a BAA
 - [ ] Claims-system test region access and integration contact
 - [ ] Security and compliance review dates booked for weeks 6 to 8
 - [ ] Launch line of business and go-live window confirmed
@@ -233,6 +260,8 @@ To start the production build (after the demo):
 | Term | Meaning |
 | --- | --- |
 | SBC | Summary of Benefits and Coverage |
+| SHOP | Small Business Health Options Program (small-group exchange plans) |
+| Public Use Files | Yearly CMS data files describing every plan on the federal exchange |
 | SPD | Summary Plan Description |
 | OOP max | Out-of-pocket maximum |
 | LOB | Line of business |
