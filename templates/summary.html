@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}{{ meta.plan_name or meta.plan_id }} summary · Plan setup for sales{% endblock %}
+{% block content %}
+<div class="sheet">
+<p class="crumb"><a href="{{ url_for('index') }}">Accounts</a> /
+  {% if account %}<a href="{{ url_for('account', account_id=account.account_id) }}">{{ account.name }}</a> /{% endif %}
+  {{ meta.plan_id }} · plan summary ·
+  <a href="{{ url_for('plan', plan_id=meta.plan_id) }}">Coding review</a></p>
+
+<h1>{{ meta.plan_name or meta.plan_id }} {% with p = meta %}{% if p.status %}{% include "_status.html" %}{% endif %}{% endwith %}</h1>
+<p class="lead">{% if account %}{{ account.name }} · effective {{ account.effective_date }} · {% endif %}{{ meta.issuer }}{% if meta.metal %} · {{ meta.metal }}{% endif %}</p>
+
+{% if open_lines %}
+<p class="note">{{ open_lines|length }} item(s) are still being checked by a benefit coder and may change:
+  {% for line in open_lines %}{{ line.label }}{% if not loop.last %}, {% endif %}{% endfor %}.</p>
+{% else %}
+<p class="note" style="background: var(--pass-bg); color: var(--pass);">Every item below has been drafted with no issues found or confirmed by a benefit coder.</p>
+{% endif %}
+
+{% for heading, lines in sections %}
+<h2>{{ heading }}</h2>
+<table class="grid">
+  <tbody>
+    {% for line in lines %}
+    <tr>
+      <td style="width: 40%">{{ line.label }}</td>
+      <td><strong>{{ line.value }}</strong></td>
+      <td style="width: 26%"><span class="pill {{ 'pass' if line.state in ('Confirmed', 'Drafted, no issues found') else 'warn' }}">{{ line.state }}</span></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endfor %}
+
+<h2>What a member would pay</h2>
+<p class="sub">Each example is the member's first claim of the year. The claim amounts are illustrative.</p>
+<table class="grid">
+  <thead><tr><th>Example</th><th class="num">Cost of care</th><th class="num">Member pays</th><th class="num">Plan pays</th></tr></thead>
+  <tbody>
+    {% for c in claims %}
+    <tr>
+      <td>{{ c.scenario }}</td>
+      <td class="num">{{ "${:,.0f}".format(c.allowed) }}</td>
+      <td class="num">{% if c.member_cost is none %}to be confirmed{% else %}{{ "${:,.0f}".format(c.member_cost) }}{% endif %}</td>
+      <td class="num">{% if c.plan_pays is not none %}{{ "${:,.0f}".format(c.plan_pays) }}{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<p class="sub">Internal working summary drafted from the plan's Summary of Benefits and Coverage. It is not a plan
+  document; the issued SBC and certificate of coverage govern.</p>
+<p class="noprint"><button onclick="window.print()">Print</button></p>
+</div>
+{% endblock %}

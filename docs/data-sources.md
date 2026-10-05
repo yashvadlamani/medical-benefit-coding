@@ -60,6 +60,10 @@ Pinned in [`ingest/plans.csv`](../ingest/plans.csv). All are 2026 small-group (S
 
 These four insurers are the only ones offering small-group medical plans in the 2026 federal exchange files.
 
+## Accounts
+
+No real account data is used. [`benefit_coding/accounts.csv`](../benefit_coding/accounts.csv) defines 12 fictional employer groups ("Example Manufacturing Co." and so on), each with a made-up sales rep, size and effective date, and assigns the public plans to them so the app can show the sales team's account view. One of them holds the seeded-error demo plan.
+
 ## Not yet collected
 
 - **Federal employee plan brochures (OPM)** and **state exchange benefit grids** (for example Covered California): no stable download links were found. To be added by hand for the long-document and grid cases.

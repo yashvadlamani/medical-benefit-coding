@@ -12,8 +12,22 @@ AI-assisted benefit coding for health insurance benefit operations: an AI pipeli
 
 The six-stage pipeline is described in [architecture.md](architecture.md).
 
+## Who it is for
+
+The tool is built for the **sales team**, to get a sold account's plans set up correctly and on time.
+
+| User | What they need | What the tool gives them |
+| --- | --- | --- |
+| Sales rep / account manager | To know whether each account's plans will be ready by the effective date, and to talk about the plan with the account accurately | An account list with setup status, days to the effective date and open items; a plain-language summary of each plan with what members would pay |
+| Benefit coder on the sales team | To turn each sold plan into system codes without re-keying the documents | A drafted, cited and pre-checked setup per plan to approve, edit or reject |
+| Sales lead | To see which accounts are at risk of a late or wrong setup | The same account list, ordered by what is not ready and soonest effective date |
+
+Everything is organised as **account → plans sold to it → fields of each plan**. An account is ready when every one of its plans is approved.
+
+
 ## Contents
 
+- [Who it is for](#who-it-is-for)
 - [Business case](#business-case)
 - [Delivery plan](#delivery-plan)
 - [Phase 1: Prototype (weeks 1 to 4)](#phase-1-prototype-weeks-1-to-4)
@@ -28,7 +42,7 @@ The six-stage pipeline is described in [architecture.md](architecture.md).
 
 ## Business case
 
-Manual coding is the bottleneck between a signed sale and a correctly paying plan. The prototype measures how much of it AI can remove.
+Manual coding is the bottleneck between a signed sale and a correctly paying plan, and the sales team owns that gap. The prototype measures how much of it AI can remove.
 
 | Pain point | Impact today | What the product changes |
 | --- | --- | --- |
@@ -37,6 +51,8 @@ Manual coding is the bottleneck between a signed sale and a correctly paying pla
 | Coding errors | Claim reprocessing, penalties, complaints | Automated SBC and test-claim checks before load |
 | Inconsistent interpretation | Same benefit coded differently | One rules library applied every time |
 | Sales promises not reflected in system | Post-sale disputes, renewal churn | Mismatches flagged before go-live |
+| Reps cannot see setup progress | Status chased by email; late surprises near the effective date | Account view with status, open items and days to the effective date |
+| Reps restate benefits from memory or the PDF | Inconsistent answers to the account | Plain-language plan summary drawn from the same coded values |
 
 ### Value model
 
@@ -45,6 +61,7 @@ To be filled in with baseline numbers gathered in week 1 of the prototype:
 - **Hours saved** = groups per year × hours per group today × share of work automated
 - **Error savings** = coding-related adjustments per year × cost per adjustment × reduction
 - **Revenue timing** = earlier effective dates on new groups
+- **Sales time** = hours reps spend chasing setup status and answering benefit questions per account
 
 Because the build is lean (about 3 months end to end), the main costs are LLM usage, hosting, and coder review time for validation.
 
@@ -105,7 +122,8 @@ Limits of public data, to state openly in the pitch:
 - Enterprise LLM with structured JSON output for extraction
 - Python service for parsing, OCR, extraction, and code mapping
 - Code library as a simple lookup table (field, value, system code), filled with placeholder codes based on public benefit categories
-- Lightweight web review screen: source document beside proposed fields and codes
+- Lightweight web workspace for the sales team: accounts and their sold plans with setup status, a plain-language summary of each plan, and a review screen with the source document beside proposed fields and codes
+- Fictional accounts grouping the public plans, since no real account data is used
 - Rules-based cost calculator standing in for the claims system, pricing 8 claim scenarios per plan and checked against the SBC Coverage Examples
 
 ### Weekly plan
@@ -119,12 +137,13 @@ Limits of public data, to state openly in the pitch:
 
 ### Demo script (20 minutes)
 
-1. Upload a public SBC the system has never seen, from an insurer outside the 25-plan set.
-2. Fields populate, each with a confidence score and its highlighted source sentence.
-3. Low-confidence fields are flagged, and a seeded SBC mismatch is caught.
-4. A coder edits one field and approves; the audit trail records the change.
-5. Test claims (preventive, specialist, ER, MRI, generic and specialty Rx) show member cost for each, alongside the SBC's own Coverage Examples.
-6. Close on the scorecard: accuracy by field, review time versus today, plans needing no edits.
+1. Open the account list as a sales rep: which accounts are ready, which are not, and how close each effective date is. Open one account and its plan summary.
+2. Upload a public SBC the system has never seen, from an insurer outside the 25-plan set.
+3. Fields populate, each with a confidence score and its highlighted source sentence.
+4. Low-confidence fields are flagged, and a seeded SBC mismatch is caught.
+5. A coder edits one field and approves; the audit trail records the change, and the account moves to "Ready to load".
+6. Test claims (preventive, specialist, ER, MRI, generic and specialty Rx) show member cost for each, alongside the SBC's own Coverage Examples.
+7. Close on the scorecard: accuracy by field, review time versus today, plans needing no edits.
 
 ### Approval criteria for Phase 2
 
@@ -201,6 +220,9 @@ Speed gains count only if accuracy holds. A faster process with more claim adjus
 | Coding-related claim adjustments | n/a | No increase | 30% reduction |
 | Groups per coder | Baseline | 1.5x | 2x |
 | Coder adoption on launch LOB | Positive verdict | 80% of new groups | 95% of new groups |
+| Days from sale to approved setup, per account | Not measured (fictional accounts) | Baseline measured | Tracked against baseline |
+| Accounts fully set up before their effective date | Not measured | Baseline measured | Tracked against baseline |
+| Sales rep adoption of the account view | Positive verdict | Measured | Measured |
 
 ## Risks and mitigations
 
@@ -221,17 +243,19 @@ The two biggest risks are a wrong code reaching production and an 8-week build s
 
 The product launches on one line of business, proves itself for a month, then expands.
 
-**Benefit coders**
+**Sales reps and account managers**
+
+- Reps see setup status for each sold account and its plans (built in the prototype, on fictional accounts)
+- A plain-language summary of each plan supports conversations with the account (built in the prototype)
+- Standard digital intake form replaces free-form emails and spreadsheets (production)
+- Accounts and effective dates come from the sales system of record instead of being entered by hand (production)
+- A later release adds a codeability check at quote stage, flagging benefits the claims system can't support before the proposal goes out
+
+**Benefit coders on the sales team**
 
 - Involved from prototype week 1 as validators of AI output
 - Roles shift toward review, exceptions, and QA rather than data entry
 - Accuracy dashboards shared openly so trust is earned with data
-
-**Sales and account management**
-
-- Standard digital intake form replaces free-form emails and spreadsheets
-- Reps see setup status for each sold group
-- A later release adds a codeability check at quote stage, flagging benefits the claims system can't support before the proposal goes out
 
 **Expansion after launch**
 
@@ -244,6 +268,7 @@ To start the prototype:
 - [ ] Sponsor approval for the 4-week prototype
 - [ ] CMS Exchange Public Use Files downloaded and SBC links confirmed for the 25 selected plans
 - [ ] A few hours a week from two reviewers with benefit-coding experience to validate output
+- [ ] One or two sales reps to react to the account view and plan summary
 - [ ] LLM API access (no BAA needed while only public documents are used)
 - [ ] Demo date booked with decision makers for the end of week 4
 
@@ -254,6 +279,7 @@ To start the production build (after the demo):
 - [ ] Claims-system test region access and integration contact
 - [ ] Security and compliance review dates booked for weeks 6 to 8
 - [ ] Launch line of business and go-live window confirmed
+- [ ] Access to the sales system that holds accounts, sold plans and effective dates
 
 ## Glossary
 

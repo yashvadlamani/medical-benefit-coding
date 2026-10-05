@@ -1,0 +1,27 @@
+account_id,account_name,state,employees,sales_rep,effective_date,plan_id
+A-1001,Example Manufacturing Co.,AL,42,Rep A,2026-12-01,46944AL0280001
+A-1001,Example Manufacturing Co.,AL,42,Rep A,2026-12-01,46944AL0340001
+A-1002,Example Logistics LLC,AL,27,Rep A,2027-01-01,46944AL0380001
+A-1002,Example Logistics LLC,AL,27,Rep A,2027-01-01,46944AL0430001
+A-1003,Example Outfitters Inc.,MT,18,Rep B,2026-11-01,32225MT0140001
+A-1003,Example Outfitters Inc.,MT,18,Rep B,2026-11-01,32225MT0140002
+A-1003,Example Outfitters Inc.,MT,18,Rep B,2026-11-01,32225MT0140003
+A-1004,Example Veterinary Partners,MT,33,Rep B,2026-12-01,32225MT0160001
+A-1004,Example Veterinary Partners,MT,33,Rep B,2026-12-01,32225MT0160002
+A-1004,Example Veterinary Partners,MT,33,Rep B,2026-12-01,32225MT0160006
+A-1005,Example Timber Supply,MT,12,Rep B,2027-01-01,32225MT0070004
+A-1005,Example Timber Supply,MT,12,Rep B,2027-01-01,32225MT0070006
+A-1006,Example Software Inc.,NH,48,Rep C,2026-12-01,57601NH0350005
+A-1006,Example Software Inc.,NH,48,Rep C,2026-12-01,57601NH0350016
+A-1007,Example Hospitality Group,NH,36,Rep C,2027-01-01,96751NH0160016
+A-1007,Example Hospitality Group,NH,36,Rep C,2027-01-01,96751NH0160037
+A-1008,Example Dairy Cooperative,WI,45,Rep A,2026-11-01,38166WI0140001
+A-1008,Example Dairy Cooperative,WI,45,Rep A,2026-11-01,38166WI0140004
+A-1008,Example Dairy Cooperative,WI,45,Rep A,2026-11-01,38166WI0140011
+A-1009,Example Machining Co.,WI,22,Rep C,2026-12-01,38166WI0140033
+A-1009,Example Machining Co.,WI,22,Rep C,2026-12-01,38166WI0140037
+A-1010,Example Accounting Group,WI,15,Rep A,2027-01-01,38166WI0140040
+A-1010,Example Accounting Group,WI,15,Rep A,2027-01-01,38166WI0140044
+A-1011,Example Print Works,WI,29,Rep C,2027-01-01,38166WI0150001
+A-1011,Example Print Works,WI,29,Rep C,2027-01-01,38166WI0150044
+A-1099,Seeded Error Demo Account,WI,10,Rep A,2027-01-01,38166WI0140040-SEEDED

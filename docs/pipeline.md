@@ -48,7 +48,7 @@ The pipeline is orchestrated by a local Python process. Document reading, extrac
 | 3. Map | None | Local code | | The mapping rules themselves |
 | 4. Validate | Azure OpenAI | Azure | Resource `medbencoding-ai`, deployment `extract` (`gpt-5-mini`); same model as extraction | LLM judge: audits every extracted value against the document |
 | 4. Validate | None | Local code | | SBC reconciliation, consistency rules, test-claim calculator |
-| 5. Review | Azure App Service | Azure | Web app `medbencoding-review-f946de69`, plan `medbencoding-plan` (Linux, B1, Central US), Python 3.12, gunicorn | Hosts the Flask review screen |
+| 5. Review | Azure App Service | Azure | Web app `medbencoding-review-f946de69`, plan `medbencoding-plan` (Linux, B1, Central US), Python 3.12, gunicorn | Hosts the sales workspace: account views, plan summaries and the coding review |
 | 5. Review | Azure Table Storage | Azure | Account `medbencodingf946de69`, tables `reviewdecisions` and `audittrail` | Reviewer decisions and the audit trail |
 | 5. Review | Azure Blob Storage | Azure | Container `prototype-docs`, `output/` prefix | The review screen reads pipeline outputs from here |
 | Scoring | None | Local code | Answer key in `data/golden/` | Accuracy report |
@@ -132,15 +132,31 @@ From the [validation report](validation-report.md), measured against the CMS pub
 
 The judge did not catch any of the 13 real extraction errors. They are all drug-tier values read from the wrong column of a multi-column table, and the judge reads the same text and makes the same reading. What it does flag is mostly reasonable but different: for example "preauthorization may be required" coded as required. The deterministic reconciliation check is what reliably catches a value that disagrees with its citation.
 
-## Step 5: Review ([`app.py`](../app.py), [`review.py`](../benefit_coding/review.py))
+## Step 5: Review ([`app.py`](../app.py), [`review.py`](../benefit_coding/review.py), [`accounts.py`](../benefit_coding/accounts.py))
 
 Live at <https://medbencoding-review-f946de69.azurewebsites.net>.
 
-- **Plan list:** every validated plan with its failed checks, fields to review, decisions so far and status.
-- **Plan page:** the source document on the left and the proposed fields and codes on the right, flagged fields first. "Show source" opens the cited page with the quoted passage highlighted. Each field shows its value, code, confidence, judge verdict and the reasons it was flagged.
+The app is the sales team's workspace. Reps work from accounts; coders work from the same data in the coding review.
+
+- **Accounts (home page):** every account with its sales rep, effective date and days remaining, how many of its plans are ready, open items, and a setup status. Accounts that are not ready and have the soonest effective date come first.
+- **Account page:** the plans sold to that account, each with its status and links to its plan summary and coding review.
+- **Plan summary:** what members pay, in plain words and without codes, grouped as deductible and out-of-pocket limit, visits and care, prescription drugs, out-of-network and prior authorization. Each line says whether it is confirmed or still being checked, a reviewer's correction replaces the drafted value, and eight examples show what a member would pay. It can be printed.
+- **Coding queue:** every plan across all accounts with its failed checks, fields to review, decisions so far and status.
+- **Coding review (plan page):** the source document on the left and the proposed fields and codes on the right, flagged fields first. "Show source" opens the cited page with the quoted passage highlighted. Each field shows its value, code, confidence, judge verdict and the reasons it was flagged.
 - **Decisions:** approve, edit (corrected value or code) or reject per field, with an optional note. "Approve plan" stays disabled until every flagged field is approved or edited; the server enforces the same rule.
 - **Audit trail:** every action is appended to the `audittrail` table with the AI's value and code, the correction, the reviewer name and a UTC timestamp, and is listed at the bottom of the plan page.
 - **Also shown:** the automated checks and the eight test claims with how each was priced.
+
+Setup status, for a plan and rolled up to its account (an account takes the status of its least advanced plan):
+
+| Status | Meaning |
+| --- | --- |
+| Awaiting review | Drafted and checked; no coder decision yet |
+| In review | A coder has decided at least one field |
+| Returned for correction | A coder rejected the plan |
+| Ready to load | A coder approved the plan |
+
+The accounts are fictional. They are listed in [`accounts.csv`](../benefit_coding/accounts.csv), which groups the 25 public plans (and the seeded-error demo plan) under 12 made-up employer groups with made-up reps, sizes and effective dates.
 
 Deploying a new version:
 
@@ -184,5 +200,7 @@ How to read these numbers:
 - Only SBCs are extracted. Brochures are classified but not used.
 - Scanned documents were checked on one image-only copy of an SBC through ingest only; extraction accuracy on scans is not measured. The script that made that copy has been removed.
 - The review app has a single shared password rather than individual accounts, no limit on sign-in attempts, no work queue and no roles, and edits are free text: a corrected value is recorded in the audit trail but does not re-run mapping or validation.
-- Review time and coder verdict are not measured; no benefit coder has used the screen.
+- Review time and coder verdict are not measured; no benefit coder or sales rep has used the app.
+- Accounts are fictional and read from a file. There is no link to a sales or CRM system, no intake form for a newly sold account, and no separate views or permissions for reps and coders.
+- The plan summary is an internal working view, not a member-facing or compliance-reviewed document.
 - Parity and state-mandate checks, and the claims-system load (step 6), are production-phase work.

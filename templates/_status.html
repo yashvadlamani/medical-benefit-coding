@@ -1,0 +1,1 @@
+{% set s = p.status %}<span class="pill {{ 'pass' if s == 'Ready to load' else 'fail' if s == 'Returned for correction' else 'warn' if s == 'In review' else 'muted' }}">{{ s }}</span>
