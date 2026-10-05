@@ -1,4 +1,7 @@
-"""Step 5. Review screen: a coder checks each plan against its source document and approves, edits or rejects.
+"""Step 5. The sales team's workspace: accounts, the plans sold to them, and the coding review for each plan.
+
+Reps see each account's setup status and a plain-language summary of every plan; benefit coders check each
+plan against its source document and approve, edit or reject.
 
 Reads pipeline outputs from Azure Blob Storage and stores decisions and the audit trail in Azure Table Storage.
 Run locally with `flask run`; on Azure App Service it is served by gunicorn as `app:app`.
@@ -9,14 +12,14 @@ The whole site sits behind one shared password. Two settings are required:
 """
 import os
 import re
-from datetime import timedelta
+from datetime import date, timedelta
 from functools import lru_cache
 
 from flask import Flask, abort, make_response, redirect, render_template, request, session, url_for
 from markupsafe import Markup, escape
 from werkzeug.security import check_password_hash
 
-from benefit_coding import review, store
+from benefit_coding import accounts, review, store
 from benefit_coding.fields import FIELDS
 
 app = Flask(__name__)
@@ -89,19 +92,71 @@ def reviewer():
     return request.cookies.get("reviewer", "").strip()
 
 
-@app.get("/")
-def index():
+def plan_rows():
+    """Every validated plan with its review progress and setup status."""
     plans = store.read_json("index.json", [])
     decided, counts = review.plan_decisions(), review.decided_counts()
     for plan in plans:
-        decision = decided.get(plan["plan_id"])
         plan["decided"] = counts.get(plan["plan_id"], 0)
-        if decision and decision["action"] in ("approve", "reject"):
-            plan["review_status"] = "Approved" if decision["action"] == "approve" else "Rejected"
-        else:
-            plan["review_status"] = "In review" if plan["decided"] else "Not started"
-    plans.sort(key=lambda p: (not p["seeded"], p["plan_id"]))
-    return render_template("index.html", plans=plans, reviewer=reviewer())
+        plan["status"] = accounts.plan_status(decided.get(plan["plan_id"]), plan["decided"])
+    return plans
+
+
+def days_until(date_text):
+    return (date.fromisoformat(date_text) - date.today()).days
+
+
+@app.get("/")
+def index():
+    """Sales view: every account, how far its plan setup has got, and how close its effective date is."""
+    plans = {p["plan_id"]: p for p in plan_rows()}
+    rows = []
+    for account in accounts.load().values():
+        sold = [plans[p] for p in account["plans"] if p in plans]
+        rows.append({**account, "plan_count": len(sold), "status": accounts.rollup([p["status"] for p in sold]),
+                     "ready": sum(p["status"] == accounts.READY for p in sold),
+                     "open_items": sum(max(p["attention"] - p["decided"], 0) for p in sold
+                                       if p["status"] != accounts.READY),
+                     "days": days_until(account["effective_date"])})
+    rows.sort(key=lambda a: (a["status"] == accounts.READY, a["effective_date"], a["name"]))
+    return render_template("index.html", accounts=rows, reviewer=reviewer())
+
+
+@app.get("/account/<account_id>")
+def account(account_id):
+    record = accounts.load().get(account_id)
+    if record is None:
+        abort(404)
+    plans = {p["plan_id"]: p for p in plan_rows()}
+    sold = [plans[p] for p in record["plans"] if p in plans]
+    return render_template("account.html", account=record, plans=sold, days=days_until(record["effective_date"]),
+                           status=accounts.rollup([p["status"] for p in sold]), reviewer=reviewer())
+
+
+@app.get("/plans")
+def plans():
+    """Coder view: every plan regardless of account."""
+    rows = plan_rows()
+    owners = accounts.load()
+    for row in rows:
+        row["account"] = accounts.account_of(row["plan_id"], owners)
+    rows.sort(key=lambda p: (not p["seeded"], p["plan_id"]))
+    return render_template("plans.html", plans=rows, reviewer=reviewer())
+
+
+@app.get("/plan/<plan_id>/summary")
+def plan_summary(plan_id):
+    """Sales view of one plan: what members pay, in plain words, without codes."""
+    validated = store.read_json(f"validated/{plan_id}.json")
+    if validated is None:
+        abort(404)
+    decisions = review.decisions(plan_id)
+    meta = next((p for p in plan_rows() if p["plan_id"] == plan_id), {"plan_id": plan_id})
+    sections = accounts.summary_lines(validated["fields"], decisions)
+    open_lines = [line for _, lines in sections for line in lines if line["state"] not in
+                  ("Confirmed", "Drafted, no issues found")]
+    return render_template("summary.html", meta=meta, sections=sections, open_lines=open_lines,
+                           account=accounts.account_of(plan_id), claims=validated["test_claims"], reviewer=reviewer())
 
 
 @app.post("/reviewer")
@@ -145,6 +200,7 @@ def plan(plan_id):
     return render_template(
         "plan.html", meta=meta, rows=rows, validated=validated, selected=selected, source=source,
         page_number=page_number, page_count=len(pages), pending=pending, plan_decision=decisions.get(review.PLAN_ROW),
+        account=accounts.account_of(plan_id),
         audit=review.audit(plan_id), reviewer=reviewer())
 
 

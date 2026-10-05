@@ -2,6 +2,8 @@
 
 **AI drafts and humans decide.** Nothing loads to the claims system without passing automated checks and a coder's approval.
 
+The tool serves the sales team. Work is organised as **account → plans sold to it → fields of each plan**: sales reps follow an account's setup status and read plain-language plan summaries, and benefit coders on the team review and approve each plan. An account is ready when all of its plans are approved.
+
 ```mermaid
 flowchart TD
     A["1. Ingest plan documents<br/>SPDs, SBCs, benefit grids, riders<br/>OCR, classify, split into benefit sections"]
@@ -23,7 +25,7 @@ flowchart TD
 | 2. Extract | LLM turns each section into structured benefit fields, each with a source passage and confidence score |
 | 3. Map | Rules engine matches fields to the in-house code library; similar past plans suggest codes for unusual benefits |
 | 4. Validate | SBC reconciliation, parity and state-mandate checks; test claims adjudicated in the claims test region |
-| 5. Review | Coders approve, edit or reject; low-confidence fields and failed validations always stop here |
+| 5. Review | Coders approve, edit or reject; low-confidence fields and failed validations always stop here. Sales reps see each account's status and a plain-language summary of every plan |
 | 6. Load | Approved codes loaded by API or generated load file; source, AI output and reviewer kept as an audit trail |
 
 ## Services by stage
@@ -35,7 +37,7 @@ flowchart TD
 | 2. Extract | Azure OpenAI (`gpt-5-mini`, deployment `extract` on the `medbencoding-ai` resource) with structured JSON output | Built |
 | 3. Map | Code library and coded plans in Azure Table Storage (`codelibrary` and `codedplans` tables in `medbencodingf946de69`); mapping rules run in the pipeline process | Built |
 | 4. Validate | SBC reconciliation, consistency rules and a rules-based test-claim calculator in the pipeline process; LLM judge on Azure OpenAI (`gpt-5-mini`) | Built (rough draft) |
-| 5. Review | Flask review screen on Azure App Service (`medbencoding-review-f946de69`); decisions and audit trail in Azure Table Storage | Built (rough draft), live at <https://medbencoding-review-f946de69.azurewebsites.net> |
+| 5. Review | Flask sales workspace (account views, plan summaries, coding review screen) on Azure App Service (`medbencoding-review-f946de69`); decisions and audit trail in Azure Table Storage | Built (rough draft), live at <https://medbencoding-review-f946de69.azurewebsites.net> |
 | 6. Load | Client claims system by API or load file | Production phase |
 
 Resource names, API versions and cost notes are in [pipeline.md](pipeline.md#services-used).

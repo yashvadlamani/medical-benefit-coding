@@ -1,34 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Plans</h1>
-<p class="lead">Each plan was read from its Summary of Benefits and Coverage, coded, and checked automatically.
-  Open a plan to review the flagged fields and approve it.</p>
+<h1>Accounts</h1>
+<p class="lead">Each account's sold plans are read from their plan documents, coded and checked automatically, then
+  reviewed by a benefit coder. An account is ready when every one of its plans is approved.</p>
 
 <table class="grid">
   <thead>
     <tr>
-      <th>Plan</th><th>Insurer</th><th>Design</th>
-      <th class="num">Failed checks</th><th class="num">Fields to review</th><th class="num">Decided</th><th>Status</th>
+      <th>Account</th><th>Sales rep</th><th>Effective date</th><th class="num">Plans ready</th>
+      <th class="num">Open items</th><th>Setup status</th>
     </tr>
   </thead>
   <tbody>
-    {% for p in plans %}
+    {% for a in accounts %}
     <tr>
-      <td>
-        <a href="{{ url_for('plan', plan_id=p.plan_id) }}">{{ p.plan_name or p.plan_id }}</a>
-        {% if p.seeded %}<span class="pill warn">Seeded error demo</span>{% endif %}
-        <div class="sub">{{ p.plan_id }}</div>
-      </td>
-      <td>{{ p.issuer }}<div class="sub">{{ p.state }}</div></td>
-      <td>{{ p.metal }}<div class="sub">{{ p.complexity }}</div></td>
-      <td class="num">{% if p.failed %}<span class="pill fail">{{ p.failed }}</span>{% else %}<span class="pill pass">0</span>{% endif %}</td>
-      <td class="num">{{ p.attention }}</td>
-      <td class="num">{{ p.decided }}</td>
-      <td><span class="pill {{ 'pass' if p.review_status == 'Approved' else 'fail' if p.review_status == 'Rejected' else 'muted' }}">{{ p.review_status }}</span></td>
+      <td><a href="{{ url_for('account', account_id=a.account_id) }}">{{ a.name }}</a>
+        <div class="sub">{{ a.account_id }} · {{ a.state }} · {{ a.employees }} employees</div></td>
+      <td>{{ a.sales_rep }}</td>
+      <td>{{ a.effective_date }}
+        <div class="sub">{% if a.days >= 0 %}in {{ a.days }} days{% else %}{{ -a.days }} days ago{% endif %}</div></td>
+      <td class="num">{{ a.ready }} of {{ a.plan_count }}</td>
+      <td class="num">{{ a.open_items }}</td>
+      <td>{% with p = a %}{% include "_status.html" %}{% endwith %}</td>
     </tr>
-    {% else %}
-    <tr><td colspan="7">No validated plans yet. Run <code>python -m benefit_coding validate</code>.</td></tr>
     {% endfor %}
   </tbody>
 </table>
+<p class="sub">Open items are fields a coder still has to confirm before the plan can be approved.</p>
 {% endblock %}

@@ -3,13 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Benefit coding review{% endblock %}</title>
+  <title>{% block title %}Plan setup for sales{% endblock %}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <header class="top">
-    <a class="brand" href="{{ url_for('index') }}">Benefit coding review</a>
-    <span class="tag">Prototype · public plan data · placeholder codes</span>
+    <a class="brand" href="{{ url_for('index') }}">Plan setup for sales</a>
+    {% if session.get('signed_in') %}
+    <nav class="nav"><a href="{{ url_for('index') }}">Accounts</a><a href="{{ url_for('plans') }}">Coding queue</a></nav>
+    {% endif %}
+    <span class="tag">Prototype · public plan data · fictional accounts · placeholder codes</span>
     {% if session.get('signed_in') %}
     <form class="reviewer" method="post" action="{{ url_for('set_reviewer') }}">
       <input type="hidden" name="next" value="{{ request.full_path }}">

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}{{ account.name }} · Plan setup for sales{% endblock %}
+{% block content %}
+<p class="crumb"><a href="{{ url_for('index') }}">Accounts</a> / {{ account.account_id }}</p>
+<h1>{{ account.name }} {% with p = {'status': status} %}{% include "_status.html" %}{% endwith %}</h1>
+
+<div class="facts">
+  <div><span>Account</span>{{ account.account_id }}</div>
+  <div><span>State</span>{{ account.state }}</div>
+  <div><span>Employees</span>{{ account.employees }}</div>
+  <div><span>Sales rep</span>{{ account.sales_rep }}</div>
+  <div><span>Effective date</span>{{ account.effective_date }}
+    ({% if days >= 0 %}in {{ days }} days{% else %}{{ -days }} days ago{% endif %})</div>
+</div>
+
+<h2>Plans sold to this account</h2>
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Plan</th><th>Insurer</th><th>Design</th><th class="num">Failed checks</th>
+      <th class="num">Fields to confirm</th><th class="num">Decided</th><th>Setup status</th><th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in plans %}
+    <tr>
+      <td>{{ p.plan_name or p.plan_id }}
+        {% if p.seeded %}<span class="pill warn">Seeded error demo</span>{% endif %}
+        <div class="sub">{{ p.plan_id }}</div></td>
+      <td>{{ p.issuer }}</td>
+      <td>{{ p.metal }}<div class="sub">{{ p.complexity }}</div></td>
+      <td class="num">{% if p.failed %}<span class="pill fail">{{ p.failed }}</span>{% else %}<span class="pill pass">0</span>{% endif %}</td>
+      <td class="num">{{ p.attention }}</td>
+      <td class="num">{{ p.decided }}</td>
+      <td>{% include "_status.html" %}</td>
+      <td><a href="{{ url_for('plan_summary', plan_id=p.plan_id) }}">Plan summary</a> ·
+        <a href="{{ url_for('plan', plan_id=p.plan_id) }}">Coding review</a></td>
+    </tr>
+    {% else %}
+    <tr><td colspan="8">No plans have been processed for this account yet.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p class="sub"><strong>Plan summary</strong> shows what members will pay, in plain words, for conversations with the
+  account. <strong>Coding review</strong> is where a benefit coder checks each value against the plan document.</p>
+{% endblock %}

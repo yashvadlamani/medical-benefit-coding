@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% block title %}{{ meta.plan_name or meta.plan_id }} · Benefit coding review{% endblock %}
 {% block content %}
-<p class="crumb"><a href="{{ url_for('index') }}">Plans</a> / {{ meta.plan_id }}</p>
+<p class="crumb"><a href="{{ url_for('index') }}">Accounts</a> /
+  {% if account %}<a href="{{ url_for('account', account_id=account.account_id) }}">{{ account.name }}</a> /{% endif %}
+  {{ meta.plan_id }} · coding review ·
+  <a href="{{ url_for('plan_summary', plan_id=meta.plan_id) }}">Plan summary</a></p>
 <h1>{{ meta.plan_name or meta.plan_id }}
   {% if meta.seeded %}<span class="pill warn">Seeded error demo</span>{% endif %}</h1>
 <p class="lead">{{ meta.issuer }}{% if meta.state %} · {{ meta.state }}{% endif %}{% if meta.metal %} · {{ meta.metal }}{% endif %}{% if meta.complexity %} · {{ meta.complexity }} design{% endif %}</p>

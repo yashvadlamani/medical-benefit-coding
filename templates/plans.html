@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Coding queue</h1>
+<p class="lead">Every plan across all accounts. Each was read from its Summary of Benefits and Coverage, coded, and
+  checked automatically. Open a plan to review the flagged fields and approve it.</p>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>Plan</th><th>Account</th><th>Insurer</th><th>Design</th>
+      <th class="num">Failed checks</th><th class="num">Fields to review</th><th class="num">Decided</th><th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in plans %}
+    <tr>
+      <td>
+        <a href="{{ url_for('plan', plan_id=p.plan_id) }}">{{ p.plan_name or p.plan_id }}</a>
+        {% if p.seeded %}<span class="pill warn">Seeded error demo</span>{% endif %}
+        <div class="sub">{{ p.plan_id }}</div>
+      </td>
+      <td>{% if p.account %}<a href="{{ url_for('account', account_id=p.account.account_id) }}">{{ p.account.name }}</a>{% endif %}</td>
+      <td>{{ p.issuer }}<div class="sub">{{ p.state }}</div></td>
+      <td>{{ p.metal }}<div class="sub">{{ p.complexity }}</div></td>
+      <td class="num">{% if p.failed %}<span class="pill fail">{{ p.failed }}</span>{% else %}<span class="pill pass">0</span>{% endif %}</td>
+      <td class="num">{{ p.attention }}</td>
+      <td class="num">{{ p.decided }}</td>
+      <td>{% include "_status.html" %}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="8">No validated plans yet. Run <code>python -m benefit_coding validate</code>.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
